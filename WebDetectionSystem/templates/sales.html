@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2><i class="fas fa-shopping-cart"></i> 销售与库存</h2>
+
+<div class="row mt-4 mb-4">
+    {% for inv in inventory %}
+    <div class="col-md-4">
+        <div class="card text-center p-3 border-{{ 'success' if inv.grade=='A级' else 'warning' }}">
+            <h3 class="display-5">{{ inv.count }}</h3>
+            <span class="text-muted">{{ inv.grade }} 库存</span>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card p-4">
+            <h4><i class="fas fa-plus-circle"></i> 新建订单</h4>
+            <form method="POST">
+                <div class="mb-3">
+                    <label>客户名称</label>
+                    <input type="text" name="customer" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label>产品等级</label>
+                    <select name="grade" class="form-select">
+                        <option value="A级">A级 (无缺陷)</option>
+                        <option value="B级">B级 (有缺陷)</option>
+                        <option value="C级">C级</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label>数量</label>
+                    <input type="number" name="quantity" class="form-control" value="1" min="1">
+                </div>
+                <div class="mb-3">
+                    <label>总价</label>
+                    <input type="number" name="price" class="form-control" placeholder="输入金额">
+                </div>
+                <button type="submit" class="btn btn-primary w-100">出库并销售</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card p-4">
+            <h4>销售记录</h4>
+            <table class="table">
+                <thead><tr><th>客户</th><th>等级</th><th>数量</th><th>金额</th><th>时间</th></tr></thead>
+                <tbody>
+                    {% for sale in sales %}
+                    <tr>
+                        <td>{{ sale.customer_name }}</td>
+                        <td>{{ sale.product_grade }}</td>
+                        <td>{{ sale.quantity }}</td>
+                        <td>{{ sale.total_price }}</td>
+                        <td>{{ sale.sale_date.strftime('%m-%d %H:%M') }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

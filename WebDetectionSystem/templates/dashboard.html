@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h1 class="display-4 text-primary mb-4">欢迎使用木材表面缺陷智能检测系统</h1>
+    <p class="lead text-muted">Web 版 v1.0 | 当前用户：{{ current_user.username }}</p>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-3">
+            <div class="card p-4 h-100 hover-shadow">
+                <i class="fas fa-camera fa-3x text-primary mb-3"></i>
+                <h5>开始检测</h5>
+                <p class="text-muted small">上传图片进行单张或批量检测</p>
+                <a href="{{ url_for('detect') }}" class="btn btn-outline-primary stretched-link">去检测</a>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-4 h-100">
+                <i class="fas fa-chart-line fa-3x text-success mb-3"></i>
+                <h5>查看日志</h5>
+                <p class="text-muted small">查看今日数据、统计报表和工作时长</p>
+                <a href="{{ url_for('logs') }}" class="btn btn-outline-success stretched-link">看报表</a>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-4 h-100">
+                <i class="fas fa-shopping-cart fa-3x text-warning mb-3"></i>
+                <h5>销售管理</h5>
+                <p class="text-muted small">板材分级入库与销售订单管理</p>
+                <a href="{{ url_for('sales') }}" class="btn btn-outline-warning stretched-link">去销售</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

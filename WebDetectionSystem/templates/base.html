@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>木材表面缺陷智能检测系统</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.3/viewer.min.css">
+    <style>
+        body { background-color: #f8f9fa; }
+        .sidebar { min-height: 100vh; background: #2c3e50; color: white; }
+
+        .sidebar .nav-link { color: rgba(255,255,255,0.85); margin-bottom: 8px; padding: 10px; }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active { color: white; background: rgba(255,255,255,0.15); border-radius: 5px; }
+
+        .sidebar .nav-link i { width: 25px; }
+
+        #camera-container { position: relative; width: 100%; max-width: 640px; display: none; margin-bottom: 15px; }
+        #video-feed { width: 100%; border-radius: 8px; border: 2px solid #333; }
+        #capture-btn { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); }
+    </style>
+</head>
+<body>
+    <div class="fixed-top" style="z-index: 1050; pointer-events: none;">
+        <div class="container mt-3">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show shadow" style="pointer-events: auto;">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+
+    {% if current_user.is_authenticated %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 sidebar p-3">
+                <h4 class="text-center mb-4 mt-2"><i class="fas fa-tree"></i> 检测系统</h4>
+                <div class="nav flex-column">
+                    <a class="nav-link" href="{{ url_for('dashboard') }}"><i class="fas fa-home"></i> 仪表盘</a>
+                    <a class="nav-link" href="{{ url_for('detect') }}"><i class="fas fa-camera"></i> 开始检测</a>
+
+                    <div class="text-primary small text-uppercase mt-3 mb-1 ms-2 fw-bold">数据管理</div>
+                    <a class="nav-link" href="{{ url_for('history') }}"><i class="fas fa-images"></i> 历史记录</a>
+                    <a class="nav-link" href="{{ url_for('logs') }}"><i class="fas fa-chart-bar"></i> 日志报表</a>
+                    <a class="nav-link" href="{{ url_for('sales') }}"><i class="fas fa-shopping-cart"></i> 销售管理</a>
+
+                    <div class="text-primary small text-uppercase mt-3 mb-1 ms-2 fw-bold">知识库</div>
+                    <a class="nav-link" href="{{ url_for('help_center') }}"><i class="fas fa-book"></i> 缺陷图谱</a>
+
+                    {% if current_user.role == 'admin' %}
+                    <div class="text-primary small text-uppercase mt-3 mb-1 ms-2 fw-bold">系统管理</div>
+                    <a class="nav-link" href="{{ url_for('admin_users') }}"><i class="fas fa-users-cog"></i> 用户管理</a>
+                    <a class="nav-link" href="{{ url_for('settings') }}"><i class="fas fa-sliders-h"></i> 系统设置</a>
+                    {% endif %}
+
+                    <hr class="mt-4">
+                    <div class="mt-auto">
+                        <div class="d-flex align-items-center mb-2 px-2">
+                            <i class="fas fa-user-circle fa-2x me-2"></i>
+                            <div>
+                                <div class="fw-bold">{{ current_user.username }}</div>
+                                <div class="mb-1">
+                                    {% if current_user.role == 'admin' %}
+                                        <span class="badge bg-success rounded-pill" style="font-size: 0.7rem;">
+                                            <i class="fas fa-shield-alt"></i> 管理员
+                                        </span>
+                                    {% else %}
+                                        <span class="badge bg-primary rounded-pill" style="font-size: 0.7rem;">
+                                            <i class="fas fa-user"></i> 普通用户
+                                        </span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ url_for('profile') }}" class="text-white-50 small" style="text-decoration: underline;">修改密码</a>
+                            </div>
+                        </div>
+                        <a class="nav-link text-success bg-dark bg-opacity-25" href="{{ url_for('logout') }}">
+                            <i class="fas fa-sign-out-alt"></i> 退出登录
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-10 p-4" style="margin-top: 20px;">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+    {% else %}
+        {% block content_guest %}{% endblock %}
+    {% endif %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.3/viewer.min.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

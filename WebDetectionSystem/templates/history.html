@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center">
+    <h2><i class="fas fa-images"></i> 历史记录</h2>
+    <form class="d-flex" method="GET" action="{{ url_for('history') }}">
+        <input class="form-control me-2" type="search" name="search" placeholder="搜索类型(如: 裂纹)..." value="{{ request.args.get('search', '') }}">
+        <button class="btn btn-outline-primary" type="submit">搜索</button>
+        {% if request.args.get('search') %}
+        <a href="{{ url_for('history') }}" class="btn btn-outline-secondary ms-2">重置</a>
+        {% endif %}
+    </form>
+</div>
+<hr>
+
+{% if records.items %}
+<div class="row" id="gallery">
+    {% for record in records.items %}
+    <div class="col-md-3 mb-4" id="card-{{ record.id }}">
+        <div class="card h-100 shadow-sm">
+            <div style="height: 180px; overflow: hidden; background: #eee; cursor: pointer; position: relative;">
+                <img src="{{ url_for('static', filename='results/' + record.result_image) }}"
+                     class="card-img-top h-100"
+                     style="object-fit: cover;"
+                     alt="{{ record.defect_type }}">
+
+                <div class="position-absolute top-0 end-0 bg-dark bg-opacity-75 text-white px-2 py-1 small m-1 rounded">
+                    {{ (record.confidence * 100) | round(1) }}%
+                </div>
+            </div>
+            <div class="card-body">
+                <h6 class="card-title text-truncate" title="{{ record.filename }}">{{ record.filename }}</h6>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="badge {{ 'bg-success' if record.grade=='A级' else ('bg-warning text-dark' if record.grade=='B级' else 'bg-danger') }}">
+                        {{ record.grade }}
+                    </span>
+                    <small class="text-muted">{{ record.defect_type }}</small>
+                </div>
+
+                <small class="text-muted d-block mt-2">
+                    <i class="far fa-clock"></i> {{ record.upload_date.strftime('%m-%d %H:%M') }}
+                </small>
+            </div>
+            <div class="card-footer bg-white border-top-0">
+                <button onclick="delRec({{ record.id }})" class="btn btn-sm btn-outline-danger w-100">
+                    <i class="fas fa-trash-alt"></i> 删除记录
+                </button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<nav aria-label="Page navigation" class="mt-4 pb-5">
+    <ul class="pagination justify-content-center">
+        <li class="page-item {% if not records.has_prev %}disabled{% endif %}">
+            <a class="page-link" href="{{ url_for('history', page=records.prev_num, search=request.args.get('search', '')) }}">
+                <i class="fas fa-chevron-left"></i> 上一页
+            </a>
+        </li>
+
+        {% for page_num in records.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+            {% if page_num %}
+                <li class="page-item {% if page_num == records.page %}active{% endif %}">
+                    <a class="page-link" href="{{ url_for('history', page=page_num, search=request.args.get('search', '')) }}">
+                        {{ page_num }}
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled"><span class="page-link">...</span></li>
+            {% endif %}
+        {% endfor %}
+
+        <li class="page-item {% if not records.has_next %}disabled{% endif %}">
+            <a class="page-link" href="{{ url_for('history', page=records.next_num, search=request.args.get('search', '')) }}">
+                下一页 <i class="fas fa-chevron-right"></i>
+            </a>
+        </li>
+    </ul>
+
+    <div class="text-center text-muted small mt-2">
+        共 {{ records.total }} 条记录，当前第 {{ records.page }} / {{ records.pages }} 页
+    </div>
+</nav>
+
+{% else %}
+<div class="text-center py-5">
+    <div class="text-muted mb-3">
+        <i class="fas fa-folder-open fa-4x"></i>
+    </div>
+    <h4>暂无相关记录</h4>
+    <p class="text-muted">当前没有任何检测记录，或者没有搜索到结果。</p>
+    <a href="{{ url_for('detect') }}" class="btn btn-primary mt-2">
+        <i class="fas fa-camera"></i> 去检测
+    </a>
+    {% if request.args.get('search') %}
+    <a href="{{ url_for('history') }}" class="btn btn-outline-secondary mt-2">返回全部</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // 初始化图片大图查看器
+    const gallery = document.getElementById('gallery');
+    if (gallery) {
+        new Viewer(gallery, {
+            toolbar: {
+                zoomIn: 1,
+                zoomOut: 1,
+                oneToOne: 1,
+                reset: 1,
+                prev: 1,
+                play: {
+                    show: 1,
+                    size: 'large',
+                },
+                next: 1,
+                rotateLeft: 1,
+                rotateRight: 1,
+                flipHorizontal: 1,
+                flipVertical: 1,
+            },
+            navbar: true,
+            title: function (image) {
+                return image.alt + ' (' + (image.naturalWidth + ' × ' + image.naturalHeight) + ')';
+            },
+        });
+    }
+
+    function delRec(id) {
+        if(confirm("确定永久删除这条记录吗？文件也将被物理删除。")) {
+            const fd = new FormData();
+            fd.append('id', id);
+
+            fetch('/history', { method: 'POST', body: fd })
+            .then(res => res.json())
+            .then(data => {
+                if(data.status==='success') {
+                    // 渐隐效果
+                    const card = document.getElementById('card-'+id);
+                    card.style.transition = 'all 0.3s';
+                    card.style.opacity = '0';
+                    setTimeout(() => {
+                        card.remove();
+                        // 如果当前页删光了，自动刷新页面
+                        if(document.querySelectorAll('#gallery .col-md-3').length === 0) {
+                            window.location.reload();
+                        }
+                    }, 300);
+                } else {
+                    alert('删除失败：' + data.msg);
+                }
+            });
+        }
+    }
+</script>
+{% endblock %}

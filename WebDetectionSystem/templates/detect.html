@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2><i class="fas fa-camera"></i> 缺陷检测</h2>
+
+<div class="card p-4 mt-3">
+    <ul class="nav nav-tabs mb-3" id="detectTab" role="tablist">
+        <li class="nav-item">
+            <button class="nav-link active" id="upload-tab" data-bs-toggle="tab" data-bs-target="#upload-pane" type="button" onclick="stopCamera()">本地上传</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="camera-tab" data-bs-toggle="tab" data-bs-target="#camera-pane" type="button" onclick="initCamera()">摄像头采集</button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="detectTabContent">
+        <div class="tab-pane fade show active" id="upload-pane">
+            <form id="uploadForm">
+                <div class="mb-3">
+                    <input class="form-control" type="file" id="images" name="images" multiple>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="startDetection('uploadForm')">
+                    <i class="fas fa-play"></i> 开始检测
+                </button>
+            </form>
+        </div>
+
+        <div class="tab-pane fade" id="camera-pane">
+            <div id="camera-container">
+                <video id="video-feed" autoplay playsinline></video>
+                <button id="capture-btn" class="btn btn-danger rounded-circle p-3" onclick="captureAndDetect()" title="拍照检测">
+                    <i class="fas fa-camera fa-2x"></i>
+                </button>
+            </div>
+
+            <div class="mt-3 text-center">
+                <button class="btn btn-secondary" onclick="stopCamera()">
+                    <i class="fas fa-video-slash"></i> 关闭摄像头
+                </button>
+            </div>
+
+            <canvas id="camera-canvas" style="display:none;"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4" id="resultsArea"></div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+let videoStream = null;
+
+// 初始化摄像头
+function initCamera() {
+    const video = document.getElementById('video-feed');
+    const container = document.getElementById('camera-container');
+    container.style.display = 'block';
+
+    // 如果已经开启，则不重复开启
+    if (videoStream) return;
+
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+            videoStream = stream;
+            video.srcObject = stream;
+            video.play();
+        }).catch(function(err) {
+            alert("无法访问摄像头: " + err.message);
+        });
+    }
+}
+
+// 关闭摄像头 (释放资源)
+function stopCamera() {
+    const video = document.getElementById('video-feed');
+    if (videoStream) {
+        videoStream.getTracks().forEach(track => track.stop());
+        videoStream = null;
+    }
+    video.srcObject = null;
+    // 如果需要切换回上传tab，可以在这里添加逻辑，但这里主要是为了释放资源
+}
+
+// 拍照并上传
+function captureAndDetect() {
+    const video = document.getElementById('video-feed');
+    const canvas = document.getElementById('camera-canvas');
+    const context = canvas.getContext('2d');
+
+    if (!video.videoWidth) {
+        alert("摄像头尚未就绪");
+        return;
+    }
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    canvas.toBlob(function(blob) {
+        const formData = new FormData();
+        formData.append('images', blob, `cam_${Date.now()}.jpg`);
+        submitDetection(formData);
+    }, 'image/jpeg');
+}
+
+function startDetection(formId) {
+    const form = document.getElementById(formId);
+    const formData = new FormData(form);
+    submitDetection(formData);
+}
+
+function submitDetection(formData) {
+    const resultsArea = document.getElementById('resultsArea');
+
+    // 显示加载状态
+    const loadingDiv = document.createElement('div');
+    loadingDiv.className = 'col-12 text-center text-muted my-3';
+    loadingDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 正在处理...';
+    resultsArea.prepend(loadingDiv);
+
+    fetch('/detect', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        loadingDiv.remove(); // 移除加载动画
+
+        if(data.error) { alert(data.error); return; }
+
+        data.forEach(item => {
+            const col = document.createElement('div');
+            col.className = 'col-md-3 mb-4';
+            const badgeClass = item.is_clean ? 'bg-success' : 'bg-danger';
+
+            // 构建HTML，显示中文缺陷和判定等级
+            col.innerHTML = `
+                <div class="card">
+                    <img src="/static/results/${item.filepath}" class="card-img-top" alt="Result">
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            <span class="badge ${badgeClass}">${item.defects}</span>
+                        </h6>
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <small class="text-muted fw-bold">判定: ${item.grade}</small>
+                            <small class="text-muted">Conf: ${item.confidence}</small>
+                        </div>
+                    </div>
+                </div>
+            `;
+            resultsArea.prepend(col);
+        });
+    })
+    .catch(err => {
+        loadingDiv.remove();
+        alert("检测请求失败");
+        console.error(err);
+    });
+}
+</script>
+{% endblock %}

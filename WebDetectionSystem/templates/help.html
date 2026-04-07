@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2><i class="fas fa-book-open"></i> 缺陷图谱与帮助中心</h2>
+<p class="text-muted">此处展示了木材表面常见的缺陷类型定义及标准判定样张，供  <strong>新员工/新用户</strong> 参考学习。</p>
+<hr>
+
+<div class="row mt-4">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-primary">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-check-circle"></i> 活节 (Live Knot)</h5>
+            </div>
+            <div style="height: 200px; overflow: hidden; background-color: #eee;">
+                <img src="{{ url_for('static', filename='img/live_knot.png') }}"
+                     class="card-img-top"
+                     style="width: 100%; height: 100%; object-fit: cover;"
+                     alt="活节样张">
+            </div>
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">判定等级：<span class="badge bg-warning text-dark">B级 (二等品)</span></h6>
+                <p class="card-text">
+                    <strong>定义：</strong><br>
+                    由树木的活枝条形成的节子。其组织与周围木材紧密连生，质地坚硬，结构正常。
+                </p>
+                <p class="card-text small text-secondary">
+                    <strong>特征：</strong><br>
+                    颜色通常比周围木材稍深，但没有黑色死皮环绕。它是木材天然特征的一部分，对结构强度影响较小。
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-danger">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0"><i class="fas fa-times-circle"></i> 死节 (Dead Knot)</h5>
+            </div>
+            <div style="height: 200px; overflow: hidden; background-color: #eee;">
+                <img src="{{ url_for('static', filename='img/dead_knot.png') }}"
+                     class="card-img-top"
+                     style="width: 100%; height: 100%; object-fit: cover;"
+                     alt="死节样张">
+            </div>
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">判定等级：<span class="badge bg-danger">C级 (次品)</span></h6>
+                <p class="card-text">
+                    <strong>定义：</strong><br>
+                    由树木枯死的枝条形成的节子。其四周不与周围木材连生或部分连生。
+                </p>
+                <p class="card-text small text-secondary">
+                    <strong>特征：</strong><br>
+                    通常被一圈黑色的树皮或腐朽组织包围。质地松软，容易脱落形成空洞（节孔），严重影响板材外观和强度。
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-danger">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0"><i class="fas fa-bolt"></i> 裂纹 (Crack)</h5>
+            </div>
+            <div style="height: 200px; overflow: hidden; background-color: #eee;">
+                <img src="{{ url_for('static', filename='img/crack.png') }}"
+                     class="card-img-top"
+                     style="width: 100%; height: 100%; object-fit: cover;"
+                     alt="裂纹样张">
+            </div>
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">判定等级：<span class="badge bg-danger">C级 (次品)</span></h6>
+                <p class="card-text">
+                    <strong>定义：</strong><br>
+                    木材纤维沿纹理方向分离形成的裂隙。
+                </p>
+                <p class="card-text small text-secondary">
+                    <strong>特征：</strong><br>
+                    表现为细长的缝隙。可能由干燥收缩、外力冲击或生长应力造成。裂纹会破坏木材的完整性，极易导致断裂。
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-info mt-4">
+    <h5><i class="fas fa-info-circle"></i> 说明</h5>
+    <ul>
+        <li><strong>A级 (优等品)</strong>：表面光洁，无上述任何明显缺陷。</li>
+        <li><strong>B级 (二等品)</strong>：允许存在少量直径较小的活节，但不影响整体强度。</li>
+        <li><strong>C级 (次品)</strong>：存在死节、裂纹或其他严重缺陷，需剔除或降级处理。</li>
+    </ul>
+</div>
+{% endblock %}

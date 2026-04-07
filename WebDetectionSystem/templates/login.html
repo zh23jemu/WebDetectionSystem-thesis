@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content_guest %}
+<style>
+    /* 登录页专属样式 */
+    .login-card { width: 400px; transition: all 0.3s; border-top: 5px solid #0d6efd; }
+
+    /* [修改] 管理员模式变为绿色 */
+    .login-card.admin-mode { border-top-color: #198754; }
+
+    .role-switch { cursor: pointer; padding: 10px; text-align: center; color: #6c757d; border-bottom: 2px solid transparent; }
+    .role-switch.active { color: #0d6efd; border-bottom-color: #0d6efd; font-weight: bold; }
+
+    /* [修改] 管理员模式下的标签和按钮变为绿色 */
+    .admin-mode .role-switch.active { color: #198754; border-bottom-color: #198754; }
+    .admin-mode .btn-primary { background-color: #198754; border-color: #198754; }
+    .admin-mode .btn-primary:hover { background-color: #157347; border-color: #146c43; }
+</style>
+
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="card p-4 shadow login-card" id="loginCard">
+        <div class="row mb-4 g-0">
+            <div class="col-6 role-switch active" id="tab-user" onclick="switchRole('user')">
+                <i class="fas fa-user"></i> 普通用户
+            </div>
+            <div class="col-6 role-switch" id="tab-admin" onclick="switchRole('admin')">
+                <i class="fas fa-user-shield"></i> 管理员
+            </div>
+        </div>
+
+        <h4 class="text-center mb-4" id="loginTitle">用户登录</h4>
+
+        <form method="POST">
+            <input type="hidden" name="login_role" id="loginRole" value="user">
+
+            <div class="mb-3">
+                <label class="form-label">账号</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    <input type="text" name="username" class="form-control" placeholder="请输入用户名" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">密码</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                    <input type="password" name="password" class="form-control" placeholder="请输入密码" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 py-2" id="loginBtn">立即登录</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function switchRole(role) {
+        const card = document.getElementById('loginCard');
+        const title = document.getElementById('loginTitle');
+        const btn = document.getElementById('loginBtn');
+        const tabUser = document.getElementById('tab-user');
+        const tabAdmin = document.getElementById('tab-admin');
+        const roleInput = document.getElementById('loginRole');
+
+        // 更新隐藏字段的值
+        roleInput.value = role;
+
+        if (role === 'admin') {
+            // 切换到管理员模式样式 (绿色)
+            card.classList.add('admin-mode');
+            title.innerText = '管理员系统登录';
+            btn.innerText = '管理员登录';
+
+            tabUser.classList.remove('active');
+            tabAdmin.classList.add('active');
+        } else {
+            // 切换到普通用户模式样式 (蓝色)
+            card.classList.remove('admin-mode');
+            title.innerText = '普通用户登录';
+            btn.innerText = '立即登录';
+
+            tabAdmin.classList.remove('active');
+            tabUser.classList.add('active');
+        }
+    }
+</script>
+{% endblock %}
