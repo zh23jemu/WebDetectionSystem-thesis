@@ -1,0 +1,587 @@
+SECTIONS 5
+SECTION 1 W 7560310 H 10692130 TOP 914400 BOTTOM 914400 LEFT 720090 RIGHT 720090
+SECTION 2 W 7560310 H 10692130 TOP 900430 BOTTOM 720090 LEFT 900430 RIGHT 720090
+SECTION 3 W 7560310 H 10692130 TOP 900430 BOTTOM 720090 LEFT 900430 RIGHT 720090
+SECTION 4 W 7560310 H 10692130 TOP 900430 BOTTOM 720090 LEFT 900430 RIGHT 720090
+SECTION 5 W 7560310 H 10692130 TOP 900430 BOTTOM 720090 LEFT 900430 RIGHT 720090
+PARAGRAPHS 537
+0006|Normal|目 录
+0007|toc 1|摘要    1
+0008|toc 1|关键词    1
+0009|toc 1|Abstract    1
+0010|toc 1|Keywords    1
+0011|toc 1|1 绪论    2
+0012|toc 2|1.1 研究背景    2
+0013|toc 2|1.2 研究现状    2
+0014|toc 3|1.2.1国外研究现状    2
+0015|toc 3|1.2.2 国内研究现状    3
+0016|toc 2|1.3 论文组织结构    3
+0017|toc 1|2关键技术    4
+0018|toc 2|2.1 Python语言技术    4
+0019|toc 2|2.2 协同过滤算法    4
+0020|toc 2|2.3 基于内容的推荐算法    4
+0021|toc 2|2.4 Flask框架    5
+0022|toc 1|3系统分析    5
+0023|toc 2|3.1 可行性研究    5
+0024|toc 3|3.1.1 经济可行性    5
+0025|toc 3|3.1.2 操作可行性    5
+0026|toc 3|3.1.3 技术可行性    6
+0027|toc 2|3.2 需求分析    6
+0028|toc 2|3.3 系统功能分析    6
+0029|toc 1|4 系统设计    8
+0030|toc 2|4.1 系统结构设计    8
+0031|toc 2|4.2 系统顺序图设计    9
+0032|toc 3|4.2.1 登录顺序图    9
+0033|toc 3|4.2.2 商品搜索顺序图    9
+0034|toc 3|4.2.3 个性化推荐顺序图    10
+0035|toc 3|4.2.4 用户反馈顺序图    10
+0036|toc 2|4.3 数据库设计    11
+0037|toc 3|4.3.1 数据库实体图设计    11
+0038|toc 3|4.3.2 数据库E-R设计    13
+0039|toc 3|4.3.3 数据库表设计    14
+0040|toc 1|5 系统实现    17
+0041|toc 2|5.1 用户功能模块的实现    17
+0042|toc 3|5.1.1 注册与登录    17
+0043|toc 3|5.1.2 商品浏览与搜索    18
+0044|toc 3|5.1.3 个性化推荐    20
+0045|toc 3|5.1.4 购物车与订单    21
+0046|toc 3|5.1.5 评论与收藏    21
+0047|toc 2|5.2 商家功能模块的实现    22
+0048|toc 3|5.2.1 商品管理    22
+0049|toc 3|5.2.2 订单管理    23
+0050|toc 3|5.2.3 数据统计    24
+0051|toc 2|5.3 管理员功能模块的实现    25
+0052|toc 3|5.3.1 用户管理    25
+0053|toc 3|5.3.2 商家管理    26
+0054|toc 3|5.3.3 分类管理    27
+0055|toc 3|5.3.4 订单管理    28
+0056|toc 3|5.3.5 评论管理    29
+0057|toc 1|6 系统测试    30
+0058|toc 2|6.1 测试目的    30
+0059|toc 2|6.2 测试用例    31
+0060|toc 2|6.3 测试结论    33
+0061|toc 1|7 总结与展望    33
+0062|toc 1|参考文献    35
+0063|toc 1|致谢    36
+0067|Normal|基于Python的个性化服装推荐系统的设计与实现
+0068|Normal|计算机科学与技术专业  张海娇
+0069|Normal|指导教师    黄浩英
+0070|Normal|摘要：为了解决传统电商平台中个性化推荐不精准、用户购物效率低的问题，采用协同过滤算法和基于内容的推荐技术，使用Python编程语言，以MySQL作为数据库，开发设计了基于Python的个性化服装推荐系统。此系统拥有用户注册登录、商品搜索查看、个性化推荐、购物车及订单处置、评价收藏等完整功能部分。此系统可实现商家的商品目录管理、订单系统对接以及销售数据可视化；可支持管理员开展针对用户维护、商家监管及评论审核的工作。系统视觉展示清爽直观，操作手段简便高效，功能运转稳定实用，极大地优化了购物流程以及用户体验，同时优化了商家运营管理流程，改善了传统服装电商推荐与管理效率不足的现状。
+0072|Normal|关键词：个性化推荐 Python 服装推荐系统 协同过滤
+0074|Normal|Design and Implementation of a Python-based Personalized Clothing Recommendation System
+0075|Normal|Computer science and technology    Zhang Haijiao
+0076|Normal|Tutor     Huang Haoying
+0078|Normal|Abstract：In order to solve the problems of inaccurate personalized recommendation and low shopping efficiency of users in traditional e-commerce platforms, a personalized clothing recommendation system based on Python is developed and designed using collaborative filtering algorithms and content-based recommendation technology, using Python programming language, and using MySQL as the database. This system has complete functional parts such as user registration and login, product search and view, personalized recommendation, shopping cart and order disposal, evaluation and collection. This system can realize merchants' catalog management, order system docking and sales data visualization; it can support administrators to carry out the work of user maintenance, merchant supervision and review of comments. The visual display of the system is refreshingly intuitive, the means of operation is simple and efficient, and the function runs stably and practically, which greatly optimizes the shopping process and the user experience, and at the same time optimizes the operation and management process of the merchants, and improves the status quo of the lack of efficiency of the traditional clothing e-commerce recommendation and management.
+0080|Normal|Keywords: Personalized Recommendation; Python; Clothing Recommendation System; Collaborative Filtering
+0085|标题01|1 绪论
+0086|标题02|1.1 研究背景
+0087|Normal|伴随社会的发展，缘于消费需求的多样化与市场竞争的激烈态势，服装行业正面临严峻的挑战。消费者在众多商品里筛选适合自己的服装，花费大量的时间和精力，于是造成消费者产生审美疲劳，购买意愿下滑。处于传统销售模式的商家，难以精准掌握消费真实需求，引起库存积压以及营销资源浪费的问题日益突出[1]。
+0088|Normal|当前大数据及人工智能领域正经历迅猛发展，个性化推荐系统渐渐成为电商平台应用中的有效解决方案。此系统对用户的订单历史、点击行为和偏好维度做数据挖掘，为用户智能匹配所需商品，进而提高用户购物效率，使消费体验更加优质[2]。商家采用推荐策略以优化库存管理与营销决策，实现了销售转化率和市场竞争力的增长，开发出一个基于Python的个性化服装推荐系统。该系统不但能助力消费者迅速挑到合适的衣物，让购物过程既便捷又有趣；还能为商家提供基于数据的决策支撑，同时减轻库存压力，进一步推动销售模式向智能化和精准化方向发展[3]。本设计将大数据分析与协同过滤算法整合，构建而成的个性化服装推荐系统高效又实用，实现了消费者和商家在服装消费领域的双重需求满足。
+0089|标题02|1.2 研究现状
+0090|标题03|1.2.1国外研究现状
+0091|Normal|有着多年研究的个性化推荐系统，普遍应用于全球领先的平台，如Netflix、Amazon等。国外在传统协同过滤算法的研究上高度集中，还引入了深度学习、强化学习等前沿技术，使推荐系统的性能和准确性得以优化。尤其是在服装推荐领域，深度学习模型已成为优化推荐系统的关键技术之一。肖爱民及其团队提出的基于交互式遗传算法的服装定制系统，借助用户偏好与历史行为改善服装推荐效果，收获了显著的成果[4]。
+0092|Normal|在国外，一些平台大量采用混合推荐手段，例如Amazon、Netflix等平台，把基于内容的推荐、协同过滤和社交网络数据整合，以增强推荐系统的精准度和个性化特性[5]。这些系统依靠分析用户的浏览、购买行为及社交互动情形，实现兴趣预测的精准性，以达成个性化推荐的目的。随着深度学习的发展，推荐系统的研究持续取得重大突破。徐胜超等人所做研究表明，这让采用深度学习的推荐系统，在熟知用户需求偏好方面达成更准确精细的效果[6]。推荐系统同样采用了强化学习，以优化长期回报的策略为手段，进而提升用户的满意度以及系统效益。国外在个性化推荐系统的深度学习、强化学习及可解释性研究方面处于领先地位，为用户提供了更精准高效的服务[7]。
+0093|标题03|1.2.2 国内研究现状
+0094|Normal|现今国内学界对服装、电商和社交应用的个性化推荐系统研究热情十分高涨。人工智能与大数据技术的急速发展，让个性化推荐技术成为电商、社交及内容平台提高用户留存情况、带动销售增长的核心手段。由于Python的易用性以及强大的功能，使其成为开发推荐系统的首选语言，特别是协同过滤与基于内容的推荐方法在国内的应用得以广泛拓展。
+0095|Normal|就服装推荐而言，国内学者把关注焦点放在了基于Python构建个性化推荐系统上，采用协同过滤与深度学习相组合的算法，借助用户交易记录和服饰类型、风格特征提升推荐匹配度[8]。在数据处理及实时更新上，国内的推荐系统进展明显，个性化推荐也变得高效又精准，但在冷启动问题与数据稀疏性的技术方面仍面临不少难题。诸多研究者试图通过社交网络协同推荐、深度学习模型优化等技术去解决这些困境[9]。研究人员动手搭建协同过滤及内容推荐的混合推荐系统，进而对推荐系统效果和效率的优化展开探讨。陈俊提出的基于Python的个性化在线学习系统，把用户的历史操作和课程内容标签关联在一起，推荐系统的个性化能力得到大幅提升[10]。除此之外，魏晓玲和刘红英的研究同样表明，基于Django框架的系统可在提升处理效率的同时，取得提升推荐系统灵活性和可扩展性的功效[11]。
+0096|标题02|1.3 论文组织结构
+0097|Normal|（1）绪论。就系统开发背景加以说明，梳理国内外相关研究现状，以及程序文档结构布局方面的说明。
+0098|Normal|（2）关键技术。说明了程序开发的技术栈整体配置，程序开发采用的技术框架、数据存储工具等信息。
+0099|Normal|（3）系统分析。分析了程序开始阶段，会遇到的可行性困境，又对程序功能及性能方面的需求作出解释。
+0100|Normal|（4）系统设计。说明了系统核心模块功能层级的架构样式，以及跟程序数据存储相关的数据库表文件编排形式等。
+0101|Normal|（5）系统实现，说明了程序操作界面功能达成的大概状况，还针对用户操作界面的部分功能进行说明。
+0102|Normal|（6）系统测试，归总了程序功能的验证事项，同时对系统测试相关术语定义及操作规范作出说明。
+0103|Normal|（7）总结与展望，对系统开发进程进行全方位的梳理总结，审视后续可拓展的研究维度空间，总结论文撰写时的经验。
+0104|标题01|2关键技术
+0105|标题02|2.1 Python语言技术
+0106|Normal|就语言层级而言，Python可归为高级语言类别，归因于语法层的高效抽象、较低的认知负荷和标准化模块体系，服务于多元化的实践范畴，涉及数据挖掘、智能算法、AI应用及个性化推荐等相关领域。针对个性化推荐系统开展开发的阶段，Python囊括了各类专业领域的库和框架，采用NumPy、Pandas、Scikit - learn加上TensorFlow等，提高开发者在数据准备、特征挖掘以及模型优化阶段的工作效率。Python高效的编程效率，可高效应对原型设计跟实验开发的时间需求，从推荐机制角度看，在协同过滤、内容推荐和混合推荐等算法的设计时大量应用[12]。
+0107|标题02|2.2 协同过滤算法
+0108|标题02|聚焦用户行为的协同过滤（Collaborative Filtering, CF）模式，作为推荐核心要点的CF技术，主要借助对用户行为数据的深度剖析与研究，在各种推荐系统当中普遍采用。以解析用户既往行为模式和项目的属性为途径，协同过滤可预判用户喜欢的内容。现有的协同过滤技术有基于用户的协同过滤与基于项目的协同过滤两种：前者系统先对用户间偏好的相似关系加以分析，找出跟目标用户行为模式近似的其他用户，采用同类用户的偏好数据进行推荐；后者其原理着眼于产品间的相似关联，从用户已有的浏览或购买记录出发，筛选属性类似的商品实施推荐。若用户之前买入了某品牌的衣物，系统当即展示该品牌的衍生款以及设计元素相似的服装。虽然协同过滤在实际的应用中表现良好，但依然面临数据稀疏与冷启动等方面的问题。有研究人员提出将深度学习、社交网络信息以及上下文感知等方式进行结合，进一步改进协同过滤算法，进而提升推荐的精准程度和用户体验[13]。
+0109|标题02|2.3 基于内容的推荐算法
+0110|Normal|以挖掘商品属性实现推荐的方法即内容过滤（Content-Based Filtering），跟协同过滤方案对比，其核心是针对用户行为进行分析，该计算逻辑是在商品属性分析基础上搭建的。在服装推荐系统中，基于内容的推荐一般是与用户的浏览或者购买偏好进行匹配，同时结合服装款式、颜色、材质以及品牌等特征去生成个性化推荐结果。该方法的优势是可以有效减轻协同过滤中的冷启动难题，因为它主要借助项目特征，不用大量用户所产生的交互数据，非常适合商品特征明显的场景，诸如服装、书籍和电影等。该方法同样有一定的局限性，推荐结果或许太过单一，难以脱离用户现有的兴趣范畴，而且没办法利用他人的评价资料，由此影响推荐的广度和新颖度。为处理这些不足，研究者提出把基于内容的推荐跟协同过滤联合起来，构建起混合推荐体系，进而在增强推荐精准程度的同时，还可提高推荐在多样性和个性化上的表现[14]。
+0111|标题02|2.4 Flask框架
+0112|Normal|作为Python生态范畴的轻量级解决办法，Flask框架可实现灵活的扩展，可有效且高效地支撑中小型Web系统开发。本研究后端借助Flask框架开展开发，牵扯到用户请求受理和数据交互的维护事宜，依靠RESTful API机制保障前后端分开开发。借助内置的Jinja2模板引擎，系统可实现商品浏览、个性化推荐以及订单管理等动态网页功能，同时还具备路由管理、会话控制和日志记录的功能，从而让开发与维护流程变得更高效。凭借良好的可扩展性，Flask可轻松地把MySQL数据库、第三方API和机器学习模型整合在一起，为个性化服装推荐系统提供稳定且灵活的后端支持。
+0113|标题01|3系统分析
+0114|标题02|3.1 可行性研究
+0115|标题03|3.1.1 经济可行性
+0116|Normal|本系统借助个性化推荐算法，实现精准的服装推荐服务，为用户解决传统购物过程中信息不对称、选择困难等状况[15]。在电商快速崛起发展的背景下，个性化推荐已成为提升用户体验与促进消费的关键手段，服装推荐系统在市场范畴内具有广阔前景与较高经济价值。系统开发成本主要由人员工资、服务器及数据库费用等组成，由于采用了Python等开源技术加上现有的机器学习框架，明显降低了开发成本[16]；采用了MySQL数据库，既节省了开支又保证了数据稳定性。基于Python的个性化推荐系统投入产出的性价比高，展现出良好的经济可实施性。
+0117|标题03|3.1.2 操作可行性
+0118|Normal|本系统设计十分简洁，主要面向的对象是终端用户和后台管理员。前端界面呈现直观的服装浏览、推荐及购买功能，用户仅需登录进去、查看货品并选择购买操作，就能完成一整套购物流程。推荐系统按照用户浏览记录和偏好实时开展更新，呈现专属个性化商品。管理员借助后台管理界面来管理商品信息、用户数据和推荐模型，支持查看用户行为表现及推荐效果，并且依照需求去优化系统设置。系统界面整体风格简明扼要，顾及操作的便捷情况与流畅状态。为对接不同用户的需求，系统对各类移动设备与浏览器兼容，为用户提供良好的跨平台操作体验，适用于广大用户群体，无需专业技术基础即可上手操作。
+0119|标题03|3.1.3 技术可行性
+0120|Normal|（1）硬件可行性分析
+0121|Normal|本系统对硬件的要求较低，能够在市面上常见的电脑端上运行，并且可以适配大部分设备的屏幕分辨率。服装推荐系统主要依赖服务器端进行计算和存储，因此对客户端硬件的要求较低。用户只需具备电脑就可以顺利访问和使用系统，并且设备的配置对系统的性能不会产生重大影响。
+0122|Normal|（2）软件可行性分析
+0123|Normal|本系统把Python选作主要的开发语言，依靠其易用性以及众多机器学习库（如 scikit-learn、TensorFlow、Keras 等），在数据分析与推荐系统开发实践中应用十分普遍。Python开发的效率高，社区富含多样资源，能迅速实现推荐算法以及数据处理。就数据存放而言，系统所采用的是MySQL关系型数据库管理系统，拥有良好扩展性以及数据一致性的保障。系统会存储下用户数据、商品信息以及评分记录等，通过MySQL的事务管理及查询优化功用，使数据操作既高效又精准。从算法推荐的角度看，采取协同过滤跟内容推荐的混合推荐策略，整合用户历史偏好跟物品属性，产生有针对性的推荐输出。大量成熟推荐系统的实例说明该混合算法是有效果的，既维持较高的精准度，又具备可实施性。系统采用的技术栈成熟、稳定性强，团队拥有做这类开发的经验，能够有效支撑推荐系统的设计及功能达成。
+0124|标题02|3.2 需求分析
+0125|Normal|本系统聚焦于达成便利高效的个性化穿搭推荐功能，让用户得以在繁多商品库中迅速找出理想服饰。为让系统可以长久稳定运行并契合用户的需求，系统需配备以下基本功能：实现用户注册和登录操作，用户需填写基础资料并完成身份验证，登录时凭借用户名和密码对账户安全予以验证；系统为用户提供商品浏览与管理功能，可实现多方面的筛选及搜索，展示服装的详细信息以及其他用户的评说，协助用户做出更为理性的购买抉择。系统采用个性化的推荐技术，将用户点击行为、购买信息与偏好相结合，实时推送契合度高的商品。推荐内容既有时效性又有精准度，排除内容的重复与陈旧现象，由此增进客户体验和商业转化的实际效果。系统另外具备用户评价机制，准许用户对所购商品作出评价，用作其他用户的参考。
+0126|标题02|3.3 系统功能分析
+0127|Normal|系统功能主要集中在管理员、用户以及商家三大模块间，后续会针对这三个模块的功能需求逐一进行说明。
+0128|Normal|（1）用户功能分析
+0129|Normal|未注册的用户可通过系统提供的注册功能创建账户，已注册的用户则可直接登录。登录完成后直接展现主工作台，设有商品陈列呈现、推荐推送服务、购物车结算、订单管理及评价系统等独立功能单元。用户需求主要集中在商品可视化、商品推荐搜索、订单交互与评价反馈这四个功能，用户用例图的相关内容详见附图3 - 1：
+0131|Normal|图3-1 用户用例图
+0132|Normal|（2）管理员功能分析
+0133|Normal|管理员通过后台管理界面，对用户、商家、商品、订单、评论及系统设置等模块进行全面操作。在用户管理方面，管理员可查看用户的注册信息、联系方式、登录状态、购物记录以及评价内容；在商家管理方面，可审核商家入驻申请、维护商家信息、处理商品发布与交易争议；在商品分类管理方面，管理员可对商品分类进行添加、修改、删除，并审核商家提交的分类信息；在订单管理方面，管理员可查看所有订单的详细信息，如订单编号、用户信息、金额以及订单状态等；在评论管理方面，管理员可审查所有商品评论。管理员用例图如图3-2所示：
+0135|Normal|图3-2 管理员用例图
+0137|Normal|（3）商家功能分析
+0138|Normal|商家主要负责商品上架管理、订单处理以及店铺运营维护相关工作。就商品管理而言，商品管理含有新品添加的权限，更新商品相关的基础档案，主要有商品名称、品类编号、交易金额、产品描述及图片合集，也可针对正在销售的商品执行编辑、删除或下架操作。在订单管理方面，商家可查看与自身店铺相关的订单详情，包括订单编号、购买用户、商品信息以及订单状态等内容。销售数据统计功能支持商家查看商品销量、订单总数和收入数据。管理员用例图如图3-3所示：
+0141|Normal|图3-3 商家用例图
+0142|标题01|4 系统设计
+0143|标题02|4.1 系统结构设计
+0144|Normal|系统结构设计在于将最终目标拆分为多个可执行的小任务，在任务完成之后组装并完成最终目标，展示系统的各个功能模块，以及这些模块之间的关系和交互。系统主要设计了三个角色：用户、商家和管理员。本系统的系统结构设计如图4-1所示。
+0146|Normal|图4-1 系统结构图
+0147|标题02|4.2 系统顺序图设计
+0148|标题03|4.2.1 登录顺序图
+0149|Normal|用户首先点击登录入口，引出登录界面。用户操作引发登录界面的加载，完成用户名、密码的输入及提交操作后，登录界面引得数据库对用户信息进行验证，该阶段用户角色进入等待的状态。验证请求进入数据库开展处理阶段，数据库处理好验证结果后返回至登录界面。若身份核验成功，用户身份认证达成后跳转进入系统主界面；若身份审查未成功，登录界面向用户呈现身份验证出错提示。登录模块顺序图如图4-2所示。
+0151|Normal|图4-2 登录顺序图
+0152|标题03|4.2.2 商品搜索顺序图
+0153|Normal|用户角色进入搜索界面并输入搜索关键词，激活搜索界面，搜索界面收到关键词后向数据库提交搜索请求。用户角色等待搜索结果，数据库处理请求后返回符合关键词的商品列表给搜索界面，搜索界面将搜索结果展示给用户。商品搜索顺序图如图4-3所示
+0155|Normal|图4-3 商品搜索顺序图
+0156|标题03|4.2.3 个性化推荐顺序图
+0157|Normal|用户角色在推荐界面进行浏览、购买等操作，产生行为数据。推荐界面完成对用户行为数据的记录，然后与数据库同步。推荐界面凭借用户操作记录到数据库中查找推荐数据，数据库为推荐界面创建商品推荐数据群组集，商品推荐结果经由推荐界面将商品展示给用户，个性化推荐顺序图执行流程如图4-4。
+0159|Normal|图4-4 个性化推荐顺序图
+0160|标题03|4.2.4 用户反馈顺序图
+0161|Normal|用户角色激活后开展反馈入口交互，引出反馈界面。界面切换进入用户反馈模块，反馈系统收到用户输入的数据后触发提交动作，反馈界面实现数据往数据库的同步。用户角色等待，数据库确认反馈数据接收成功后，反馈界面向用户显示反馈提交成功提示。用户反馈提交顺序图如图4-5所示。
+0163|Normal|图4-5 用户反馈顺序图
+0164|标题02|4.3 数据库设计
+0165|标题03|4.3.1 数据库实体图设计
+0166|Normal|（1）该订单实体属性图呈现了如下单时间、支付时间、收货地址等字段。订单实体属性图示意图如图4-6。
+0169|Normal|图4-6 订单实体属性图
+0170|Normal|（2）商品实体的属性图示中存有商品名称、描述、分类等信息字段。商品实体属性图示意图如图4-7。
+0173|Normal|图4-7 商品实体属性图
+0174|Normal|（3）用户实体属性图将用户名、性别、密码和年龄等字段整合在一起。用户实体属性图示意图如图4 - 8。
+0176|Normal|图4-8 用户实体属性图
+0177|Normal|（4）评论实体属性图里有用户ID、评论时间、评分以及商品ID等字段。评论实体属性图示意图如图4-9。
+0180|Normal|图4-9 评论实体属性图
+0181|Normal|商家实体属性图主要包含店名、注册的时间、地址及邮箱等字段。商家实体属性图示意图如图4-10。
+0184|Caption|图 4-10 商家实体属性图
+0185|Normal|（6）管理员实体属性图当中的身份信息部分由密码、联系电话及邮箱等要素组成，拥有跟商品及订单相关的管理权限。管理员实体属性图示意图如图示4 - 11。
+0187|Caption|图 4-11 管理员实体属性图
+0188|Normal|地址实体图属性图所展示的地址属性包含用户编号、地址编号等方面的内容。地址实体属性图示意图如图4-12。
+0191|Caption|图 4-12 地址实体属性图
+0192|标题03|4.3.2 数据库E-R设计
+0193|Normal|基于Python的个性化服装推荐系统，以用户、商家、管理员为核心的服装推荐系统的数据模型。用户可以浏览商品、创建订单并发表评论，可以将商品进行收藏或加入购物车；商家可以对商品进行上下架、处理用户订单；管理员则是对用户、商家、商品以及评论进行管理。系统E-R图如图4-13所示。
+0195|Normal|图4-13 系统E-R图
+0196|标题03|4.3.3 数据库表设计
+0197|Normal|购物车表用于存储购物车相关数据信息操作时服务 。购物车表如表4-1所示。
+0198|Normal|表4-1 carts购物车表
+0200|Normal|服装表用于存储系统中服装商品相关数据信息操作时服务。服装表如表4-2所示。
+0201|Normal|表4-2 clothes 服装表
+0202|Normal|续表
+0204|Normal|（3）评论表用于存储用户对商品的评论相关数据信息操作时服务。评价表如表4-3所示。
+0205|Normal|表4-3 comments 评论表
+0207|Normal|（4）订单表用于存储订单相关数据信息操作时服务。订单表如表4-4所示。
+0208|Normal|表4-4 orders订单表
+0210|Normal|续表
+0212|Normal|（5）用户地址表用于存储用户地址相关数据信息操作时服务。用户地址表如表4-5所示。
+0213|Normal|表4-5 user_addresses用户地址表
+0215|Normal|（6）用户收藏表用于存储用户收藏服装相关数据信息操作时服务。用户收藏表如表4-6所示。
+0216|Normal|表4-6 user_favorites 用户收藏表
+0218|Normal|（7）用户表用于存储用户各项数据信息操作时服务。用户表如表4-7所示。
+0219|Normal|表4-7 users 用户表
+0220|Normal|续表
+0221|标题01|5 系统实现
+0222|标题02|5.1 用户功能模块的实现
+0223|标题03|5.1.1 注册与登录
+0224|Normal|用户可借助注册功能创建新的账户，完成登录后即可对系统进行操作。平台采用用户名加密码的组合实施身份验证，施行账户身份的安全鉴别程序，用户登录界面示意图如图5-1所示：
+0226|Normal|图5-1 用户登录界面
+0227|Normal|部分关键代码如下：
+0228|Normal|# app/views/auth.py
+0229|Normal|@bp.route('/login', methods=['GET', 'POST'])
+0230|Normal|def login():
+0231|Normal|if request.method == 'POST':
+0232|Normal|username = request.form.get('username')
+0233|Normal|password = request.form.get('password')
+0234|Normal|remember = request.form.get('remember') == 'on'
+0235|Normal|user_type = request.form.get('usertype')
+0236|Normal|user = User.query.filter_by(username=username, role=user_type).first()
+0237|Normal|if user and user.verify_password(password):
+0238|Normal|login_user(user, remember=remember)
+0239|Normal|next_page = request.args.get('next')
+0240|Normal|return redirect(next_page or url_for('main.index'))
+0241|Normal|flash('用户名、密码或角色错误')
+0242|Normal|return render_template('auth/login.html')
+0243|标题03|5.1.2 商品浏览与搜索
+0244|Normal|用户既可以在分类页去浏览商品，还可径直搜索关键词，进而查看商品的完整描述，含有图片资料、价格标注与说明性文字等，商品浏览与搜索示意图如图5-2所示：
+0246|Normal|图5-2 商品浏览与搜索界面
+0247|Normal|部分关键代码如下：
+0248|Normal|# app/views/main.py
+0249|Normal|@main_bp.route('/browse')
+0250|Normal|def browse():
+0251|Normal|category = request.args.get('category', None)
+0252|Normal|if category:
+0253|Normal|items = Clothing.query.filter_by(category=category).all()
+0254|Normal|else:
+0255|Normal|items = Clothing.query.all()
+0256|Normal|return render_template('main/index.html', items=items)
+0257|Normal|@main_bp.route('/search', methods=['GET'])
+0258|Normal|def search():
+0259|Normal|query = request.args.get('q', '')
+0260|Normal|if query:
+0261|Normal|items = Clothing.query.filter(Clothing.name.ilike(f'%{query}%')).all()
+0262|Normal|else:
+0263|Normal|items = []
+0264|Normal|return render_template('main/search.html', items=items, query=query)
+0265|标题03|5.1.3 个性化推荐
+0266|Normal|系统根据用户的浏览记录和购买历史，生成并展示个性化的商品推荐，帮助用户快速找到感兴趣的商品。个性化推荐界面示意图如图5-3所示：
+0268|Normal|图5-3 个性化推荐界面
+0270|Normal|部分关键代码如下：
+0271|Normal|def get_recommendations_for_user(user, n=6):
+0272|Normal|"为用户生成个性化推荐列表"
+0273|Normal|content_based = content_recommender.get_recommendations_for_user(user, n)
+0274|Normal|collaborative = collaborative_recommender.get_recommendations_for_user(user, n)
+0275|Normal|favorite_based = get_recommendations_from_favorites(user, n)
+0276|Normal|history_based = get_recommendations_from_history(user, n)
+0277|Normal|all_recommendations = []
+0278|Normal|sources = [
+0279|Normal|(content_based, 0.3),
+0280|Normal|(collaborative, 0.3),
+0281|Normal|(favorite_based, 0.2),
+0282|Normal|(history_based, 0.2) ]
+0283|Normal|for items, weight in sources:
+0284|Normal|if items:
+0285|Normal|all_recommendations.extend((item, weight) for item in items)
+0286|标题03|5.1.4 购物车与订单
+0287|Normal|用户可以将需要的商品加到购物车清单里，然后发起付款动作，用户能查看订单目前所处状态及明细，购物车与订单界面示意图如图5 - 4所示：
+0289|Normal|图5-4 购物车与订单界面
+0290|Normal|部分关键代码如下：
+0291|Normal|def checkout():
+0292|Normal|cart_items = Cart.query.filter_by(user_id=current_user.id).all()
+0293|Normal|if cart_items:
+0294|Normal|order =Order(user_id=current_user.id,
+0295|Normal|total=sum(item.clothing.price for item in cart_items))
+0296|Normal|db.session.add(order)
+0297|Normal|db.session.commit()
+0298|Normal|# Clear the cart
+0299|Normal|for item in cart_items:
+0300|Normal|db.session.delete(item)
+0301|Normal|db.session.commit()
+0302|Normal|flash('Order placed successfully', 'success')
+0303|Normal|else:
+0304|Normal|flash('Your cart is empty', 'danger')
+0305|Normal|return redirect(url_for('order.cart'))
+0306|标题03|5.1.5 评论与收藏
+0307|Normal|系统实现了用户评价跟收藏功能的集成，消费者下单后既可以打星来评价，还可提交文字相关反馈，展现对商品参数、服务质量以及运输状况的直观评价，商家可对评价进行回复，增强互动性，并且可以根据用户的反馈对服务进行改进。评论与收藏界面示意图如图5-5所示：
+0309|Normal|图5-5 评论与收藏界面
+0310|Normal|部分关键代码如下：
+0311|Normal|# app/views/user.py
+0312|Normal|@user_bp.route('/add_comment/<int:clothing_id>', methods=['POST'])
+0313|Normal|@login_required
+0314|Normal|def add_comment(clothing_id):
+0315|Normal|content = request.form.get('content')
+0316|Normal|new_comment=Comment(user_id=current_user.id,
+0317|Normal|clothing_id=clothing_id, content=content)
+0318|Normal|db.session.add(new_comment)
+0319|Normal|db.session.commit()
+0320|Normal|flash('Comment added successfully', 'success')
+0321|Normal|return redirect(url_for('main.clothing_detail', clothing_id=clothing_id))
+0322|Normal|@user_bp.route('/favorites')
+0323|Normal|@login_required
+0324|Normal|def favorites():
+0325|Normal|favorite_items = UserFavorites.query.filter_by(user_id=current_user.id).all()
+0326|Normal|return render_template('user/favorites.html', items=favorite_items)
+0327|标题02|5.2 商家功能模块的实现
+0328|标题03|5.2.1 商品管理
+0329|Normal|商户可凭借商品管理功能开展商品添加、信息调整及商品移除事项，可进行商品图片上传、添加描述且设定价格等属性，商品管理界面示意图如图5 - 6所示：
+0331|Normal|图5-6 商品管理界面
+0332|Normal|部分关键代码如下：
+0333|Normal|# app/views/merchant.py
+0334|Normal|@bp.route('/add_clothing', methods=['GET', 'POST'])
+0335|Normal|@login_required
+0336|Normal|@merchant_required
+0337|Normal|def add_clothing():
+0338|Normal|"""添加新商品"""
+0339|Normal|if request.method == 'POST':
+0340|Normal|name = request.form.get('name')
+0341|Normal|category_id = request.form.get('category_id')
+0342|Normal|price = request.form.get('price')
+0343|Normal|stock = request.form.get('stock')
+0344|Normal|description = request.form.get('description')
+0345|Normal|file = request.files['image']
+0346|标题03|5.2.2 订单管理
+0347|Normal|系统为商家赋予订单管理权限，商家可借助订单管理工具搜索本店铺全部交易数据，支持查看订单标识、用户身份、商品组成内容、支付总款项数额、进展程度状况及下单时间等。订单管理界面示意图如图5 - 7所示：
+0349|Normal|图5-7 订单管理界面
+0350|Normal|部分关键代码如下：
+0351|Normal|# app/views/merchant.py
+0352|Normal|@bp.route('/orders')
+0353|Normal|@login_required
+0354|Normal|@merchant_required
+0355|Normal|def orders():
+0356|Normal|"""查看商家订单"""
+0357|Normal|orders = Order.query.join(OrderItem).join(Clothing)\
+0358|Normal|.filter(Clothing.merchant_id == current_user.id).all()
+0359|Normal|return render_template('merchant/orders.html', orders=orders)
+0360|Normal|@bp.route('/order/<int:order_id>', methods=['GET', 'POST'])
+0361|Normal|@login_required
+0362|Normal|@merchant_required
+0363|标题03|5.2.3 数据统计
+0364|Normal|商家可以在系统提供的商家中心页面查看与其店铺相关的各项统计数据，包括当前商品总数、今日订单量、今日收入以及累计收入等指标，全面掌握店铺运营状况。页面顶部以数据卡片形式展示关键数值，商家可以快速了解销售动态。数据统计界面示意图如图5-8所示：
+0366|Normal|图5-8 数据统计界面
+0367|Normal|部分关键代码如下：
+0368|Normal|Order.created_at.between(today_start, today_end))\.distinct().count()
+0369|Normal|today_revenue = db.session.query(func.sum(Order.total_amount))\.join(OrderItem)\
+0370|Normal|.join(Clothing)\.filter(Clothing.merchant_id == current_user.id,
+0371|Normal|Order.status.in_(['paid', 'shipped', 'completed']),
+0372|Normal|Order.created_at.between(today_start, today_end))\
+0373|Normal|.scalar() or 0
+0374|Normal|total_revenue = db.session.query(func.sum(Order.total_amount))\
+0375|Normal|.join(OrderItem)\
+0376|Normal|.join(Clothing)\
+0377|Normal|.filter(Clothing.merchant_id == current_user.id,
+0378|Normal|Order.status.in_(['paid', 'shipped', 'completed']))\.scalar() or 0
+0379|Normal|stats = {
+0380|Normal|'total_products': total_products,
+0381|Normal|'today_orders': today_orders,
+0382|Normal|'today_revenue': today_revenue,
+0383|Normal|'total_revenue': total_revenue
+0384|Normal|}
+0385|Normal|return render_template('merchant/dashboard.html', stats=stats)
+0386|标题02|5.3 管理员功能模块的实现
+0387|标题03|5.3.1 用户管理
+0388|Normal|管理员可以在系统后台中查看所有用户的注册信息，包括用户名、邮箱、注册时间、账户状态等详细资料。管理员有权限对用户信息进行编辑修改，例如，更改用户名、激活或禁用账户状态等，确保用户行为的规范性和数据的准确性。用户管理界面示意图如图5-9所示：
+0390|Normal|图5-9 用户管理界面
+0391|Normal|部分关键代码如下：
+0392|Normal|user = User.query.get_or_404(user_id)
+0393|Normal|if request.method == 'POST':
+0394|Normal|user.username = request.form.get('username')
+0395|Normal|user.email = request.form.get('email')
+0396|Normal|user.is_active = request.form.get('is_active') == 'on'
+0397|Normal|db.session.commit()
+0398|Normal|flash('用户信息已更新！', 'success')
+0399|Normal|return redirect(url_for('admin.users'))
+0400|标题03|5.3.2 商家管理
+0401|Normal|管理员负责平台上商家的入驻审核、信息维护与行为监管。系统后台支持管理员查看全部注册商家的列表信息，包括商家名称、联系方式、店铺状态等。同时，管理员可根据平台规则对商家入驻申请进行审批，也可编辑商家信息或注销违规商户账户。商家管理界面示意图如图5-10所示：
+0403|Normal|图5-10 商家管理界面
+0404|Normal|部分关键代码如下：
+0405|Normal|"""查看商家列表"""
+0406|Normal|merchant_list = User.query.filter_by(role='merchant').all()
+0407|Normal|return render_template('admin/merchants.html', merchants=merchant_list)
+0408|Normal|@bp.route('/merchant/edit/<int:merchant_id>', methods=['GET', 'POST'])
+0409|Normal|@login_required
+0410|Normal|@admin_required
+0411|Normal|def edit_merchant(merchant_id):
+0412|Normal|"""编辑商家信息"""
+0413|Normal|merchant = User.query.get_or_404(merchant_id)
+0414|Normal|if request.method == 'POST':
+0415|Normal|merchant.shop_name = request.form.get('shop_name')
+0416|Normal|merchant.shop_status = request.form.get('shop_status')
+0417|Normal|db.session.commit()
+0418|Normal|flash('商家信息已更新！', 'success')
+0419|Normal|return redirect(url_for('admin.merchants'))
+0420|标题03|5.3.3 分类管理
+0421|Normal|分类管理功能主要是用来维护平台商品的分类体系。管理员可以通过后台界面对商品的分类进行查看、添加、修改以及删除操作。在新增分类时，管理员可以对分类名称进行设置，系统能够自动生成对应ID；编辑分类支持对分类名称进行更改。分类管理界面示意图如图5-11所示：
+0423|Normal|图5-11 分类管理界面
+0424|Normal|部分关键代码如下：
+0425|Normal|"""添加分类"""
+0426|Normal|if request.method == 'POST':
+0427|Normal|name = request.form.get('name')
+0428|Normal|new_category = Category(name=name)
+0429|Normal|db.session.add(new_category)
+0430|Normal|db.session.commit()
+0431|Normal|flash('分类已添加！', 'success')
+0432|Normal|return redirect(url_for('admin.categories'))
+0433|Normal|return render_template('admin/add_category.html')
+0434|Normal|def edit_category(category_id):
+0435|Normal|"""编辑分类"""
+0436|Normal|category = Category.query.get_or_404(category_id)
+0437|Normal|if request.method == 'POST':
+0438|Normal|category.name = request.form.get('name')
+0439|Normal|db.session.commit()
+0440|Normal|flash('分类已更新！', 'success')
+0441|Normal|return redirect(url_for('admin.categories'))
+0442|标题03|5.3.4 订单管理
+0443|Normal|系统为管理员赋予全面查看平台订单信息的权力，主要有订单索引号、购买者姓名、物流所处状态、下单当天日期、实际收款数额等参数。管理员可按条件筛选订单，并可进入订单详情页查看具体商品内容及物流状态，订单管理界面示意图如图5-12所示：
+0445|Normal|图5-12 订单管理界面
+0446|Normal|部分关键代码如下：
+0447|Normal|"""订单发货"""
+0448|Normal|order = Order.query.get_or_404(order_id)
+0449|Normal|has_merchant_items=any(item.clothing.merchant_id == current_user.id
+0450|Normal|for item in order.items)
+0451|Normal|if not has_merchant_items:
+0452|Normal|return jsonify({'success': False, 'message': '没有权限操作此订单'})
+0453|Normal|if order.status != 'paid':
+0454|Normal|return jsonify({'success': False, 'message': '只能发货已付款的订单'})
+0455|Normal|try:
+0456|Normal|order.status = 'shipped'
+0457|Normal|order.shipped_at = datetime.now()
+0458|Normal|db.session.commit()
+0459|Normal|return jsonify({'success': True, 'message': '发货成功'})
+0460|Normal|except Exception as e:
+0461|Normal|db.session.rollback()
+0462|Normal|return jsonify({'success': False, 'message': f'发货失败：{str(e)}'})
+0463|标题03|5.3.5 评论管理
+0464|Normal|管理员通过后台查看平台内所有商品的用户所评论的内容，并具备删除不当评论的权限。评论管理模块可以按照商品、评分等级或发布时间进行筛选，以此来帮助管理员快速定位存在问题的评论，评论管理界面示意图如图5-13所示：
+0466|Normal|图5-13 评论管理界面
+0467|Normal|部分关键代码如下：
+0468|Normal|"""商家回复评论"""
+0469|Normal|comment = Comment.query.get_or_404(id)
+0470|Normal|if comment.product.merchant_id != current_user.id:
+0471|Normal|return jsonify({'success': False, 'message': '没有权限回复此评论'})
+0472|Normal|if comment.merchant_reply:
+0473|Normal|return jsonify({'success': False, 'message': '已经回复过此评论'})
+0474|Normal|data = request.get_json()
+0475|Normal|content = data.get('content', '').strip()
+0476|Normal|if not content:
+0477|Normal|return jsonify({'success': False, 'message': '回复内容不能为空'})
+0478|Normal|try:
+0479|Normal|comment.merchant_reply = content
+0480|Normal|comment.reply_time = datetime.now()
+0481|Normal|db.session.commit()
+0482|Normal|return jsonify({'success': True, 'message': '回复成功'})
+0483|标题01|6 系统测试
+0484|标题02|6.1 测试目的
+0485|Normal|测试主要针对系统开展整体的校验，重点对系统的稳定持久性、操作直观性及功能实现质量进行评估，保证系统在正式投产阶段无关键运行问题，这属于系统开发周期中一定要实施的关键阶段。在软件开发阶段，开发人员依次针对各功能模块开展检验，可快速察觉并排除异常状况，防止系统集成阶段因故障定位复杂造成开发进度缓慢。
+0486|Normal|本系统开发结束完成后，旨在找出程序里可能存在的问题进入到测试环节。测试利用模拟用户使用场景开展，查看系统功能的精准度和性能的稳定性。测试的主要目的是查找不足然后补漏，保证程序功能恰当、界面友好以及性能稳定，保证用户在使用系统的时候有流畅体验。开发者大多采用黑盒测试法，从用户的角度去考量，模拟各种会用到的场景，对系统的输入、输出以及功能表现进行全面核查。
+0487|标题02|6.2 测试用例
+0488|Normal|软件测试实践把测试用例作为主要依托，根据测试用例，查看系统是否存在潜藏的漏洞或缺陷。对于基于Python的个性化服装推荐系统，涉及用户、商品、订单、评论、推荐模块的一整套测试案例。
+0489|Normal|（1）用户功能模块主要对用户注册及登录功能进行处理，系统要求用户以用户名和密码认证身份后才可登录。用户功能测试用例表如表6-1。
+0490|Normal|表6-1 用户功能测试用例
+0492|Normal|续表
+0494|Normal|（2）商家利用此系统模块实施商品资料管理，能实现商品上架、信息修正等操作。商品管理模块测试用例如表6 - 2。
+0495|Normal|表6-2 商品管理模块测试用例
+0497|Normal|（3）订单管理模块涉及用户的订单提交与管理，确保用户可以顺利下单，并正确处理订单状态。订单管理模块测试用例如表6-3所示。
+0498|Normal|表6-3 订单管理模块测试用例
+0501|Normal|续表
+0503|Normal|（4）评论与收藏功能允许用户对购买的商品进行评价，并收藏感兴趣的商品。评论与收藏模块测试用例如表6-4所示。
+0504|Normal|表6-4 评论与收藏模块测试用例
+0506|Normal|（5）个性化推荐模块基于用户的浏览历史和购买记录，提供定制化的推荐内容。个性化推荐模块测试用例如表6-5所示。
+0507|Normal|表6-5 个性化推荐模块测试用例
+0508|标题02|6.3 测试结论
+0509|Normal|对系统所涉及的用户注册登录、商品管理、订单处理、评论功能以及个性化推荐等主要模块进行测试，各项测试均成功结束验证，结果跟预期相契合，系统功能齐全且运转平稳，基本符合用户的功能需求。同时，测试过程中发现的小问题也已修复，流畅的整体功能流程，清晰的界面设计，符合用户的体验标准。
+0510|Normal|本次测试完成后，系统具备了上线运行的条件。后续将持续对系统进行测试与优化，确保系统在运营过程中，能够使用户需求得到满足，并且保证系统能够高效稳定的运行。
+0511|标题01|7 总结与展望
+0512|Normal|本论文依托Python语言展开，并融合机器学习与数据挖掘技术，设计且实现出一套个性化服装推荐系统，为用户创造高效又便捷的购物体验。系统主要涉及用户模块、商家模块以及管理员模块这三大模块，还对商品管理、订单管理、评论管理、个性化推荐等功能做了全面的实现与测试。
+0513|Normal|在论文研究期间，主要完成了以下工作：对个性化推荐系统理论背景及发展现状开展研究，明确推荐系统在服装电商的应用价值；搭建系统的架构，采取模块化的开发模式，保证系统的灵活性以及可扩展性；达成基于用户兴趣的个性化推荐功能这一目标，以用户的浏览记录和购买行为的相关数据为依据，列出商品推荐列表；构建商家及管理员的管理功能系统，使系统能够高效地开展商品、订单及用户数据的维护管理事宜；采用系统测试途径，对系统的各项功能开展了全面测试，保证系统运行既稳定又可靠。系统在实施过程中同样存在一些缺陷，在未来研究和开发工作期间会继续对此加以研究，改善推荐算法逻辑，增进用户的体验，增进系统实际性能。
+0514|Normal|本论文实现了个性化服装推荐系统的设计与实现，向用户提供个性化的相关服务，为商家和管理员分别给予了高效实用的管理工具。尽管当前系统在功能和性能上还存在一定的缺陷，但从整体架构与功能实现情况来看，已展现出一定的应用价值。在未来后续的工作里，将会融合更多技术创新及用户需求，着手对系统功能进一步完善，优化用户的实际体验，助力个性化推荐技术在服装电商领域深入拓展。
+0516|Heading 1|参考文献
+0517|Normal|谢春丽.浅谈Python语言的发展与应用分析[J].中国新通信,2023,25(22):77-79.
+0518|Normal|张晓倩.基于机器学习算法的推荐系统[J].中国科技信息,2023,(11):104-107.
+0519|Normal|姚文竹,阮玉燕.AI驱动个性化服装设计与定制创新研究[J].中国服饰,2024,(08):56-57.
+0520|Normal|于龙,肖爱民,邱迅,等. 基于交互式遗传算法的服装定制系统[J]. 毛纺科技,2023,51(9):100-106.
+0521|Normal|陆浩言.基于协同过滤和内容的推荐算法在电影推荐系统中的融合研究[J].电脑知识与技术,2025,21(01):79-81.
+0522|Normal|何剑萍,徐胜超,贺敏伟.大学生就业岗位信息个性化推送方法[J].信息技术,2025,(04):28-34.
+0523|Normal|聂静.基于Python技术的计算机文档保密管理系统设计与实现[J].电脑编程技巧与维护,2024,(10):90-92+116.
+0524|Normal|汪垚.基于机器学习方法的内容推荐系统探究[J].信息记录材料,2024,25(03):19-21+24.
+0525|Normal|胡迪.基于机器学习的智能商品推荐系统研究[J].无线互联科技,2023,20(16):18-21.
+0526|Normal|陈俊.基于Python的个性化在线学习系统的设计与实现[J].电脑知识与技术,2023,19(28):37-39.
+0527|Normal|魏晓玲,刘红英.基于Python和Django框架的琴房管理系统设计与实现[J].无线互联科技,2023,20(22):51-53.
+0528|Normal|邓昌浩.基于图神经网络的推荐算法研究与实现[D].西南交通大学,2023.
+0529|Normal|Zhigang M .Design and Implementation of the Employment Management Decision Support System based on Machine Learning[J].Journal of Electronic Research and Application,2024,8(5):134-140.
+0530|Normal|Filipowska A ,Filipowski W ,Raif P , et al.Machine Learning-Based Gesture Recognition Glove: Design and Implementation.[J].Sensors (Basel, Switzerland),2024,24(18):6157-6157.
+0531|Normal|林展图.基于多维度特征融合与协同注意力的时尚推荐算法研究[D].深圳大学,2023.
+0532|Normal|闫佳伟.基于图神经网络的个性化套装推荐方法研究[D].杭州电子科技大学,2023.
+0534|标题01|致谢
+0535|Normal|在本论文撰写的过程中，离不开各位老师、同学、家人和朋友的帮助，我怀着无比感激的心情，向那些在我的学习和研究过程中给予了帮助和支持的人，致以最真挚的谢意。
+0536|Normal|特别感谢我的导师，用深厚的学术造诣和严谨的治学态度在我的学习和研究过程中起到了至关重要的作用。在论文撰写的每个阶段，都给予了耐心的指导和中肯的建议，使我的论文撰写能够顺利完成。感谢我的同学与朋友，特别是在课题研究和系统开发中给予我帮助的伙伴们。感谢我的家人，正是因为家人的默默支持和包容，能够让我全身心的投入到学习和研究中。
+0537|Normal|尽管论文的研究和写作还存在一些不足，但它凝聚了我的努力与思考。我将继续怀着一颗谦虚的心，向更高的目标迈进。
+TABLES 18
+TABLE 1 rows 1 cols 1
+
+TABLE 2 rows 5 cols 5
+列   名|字段名称|类型（长度）|能否为空|约束
+id|编号|int|否|主键
+user_id|用户id|int|否|
+status|状态|varchar(20)|是|
+created_at|创建时间|datetime|否|
+TABLE 3 rows 8 cols 5
+列   名|字段名称|类型（长度）|能否为空|约束
+id|编号|int|否|主键
+name|名称|varchar(100)|否|
+description|描述|text|是|
+price|价格|float|否|
+style|风格|varchar(50)|是|
+size|尺码|varchar(20)|是|
+color|颜色|varchar(30)|是|
+TABLE 4 rows 5 cols 5
+image_url|图片链接|varchar(200)|是|
+merchant_id|商家id|int|否|
+created_at|创建时间|datetime|否|
+features|特征|json|是|
+category_id|类别id|int|是|
+TABLE 5 rows 8 cols 5
+列   名|字段名称|类型（长度）|能否为空|约束
+id|编号|int|否|主键
+content|内容|text|否|
+rating|评分|int|否|
+merchant_reply|商家回复|text|是|
+reply_time|回复时间|datetime|是|
+user_id|用户id|int|否|
+product_id|商品id|int|否|
+TABLE 6 rows 11 cols 5
+列   名|字段名称|类型（长度）|能否为空|约束
+id|编号|int|否|主键
+user_id|用户id|int|否|
+total_amount|总金额|float|否|
+status|状态|varchar(20)|否|
+created_at|创建时间|datetime|否|
+paid_at|支付时间|datetime|是|
+shipped_at|发货时间|datetime|是|
+completed_at|完成时间|datetime|是|
+receiver_name|收件人姓名|varchar(50)|否|
+receiver_phone|收件人电话|varchar(20)|否|
+TABLE 7 rows 1 cols 5
+shipping_address|收件地址|varchar(200)|否|
+TABLE 8 rows 11 cols 5
+列   名|字段名称|类型（长度）|能否为空|约束
+id|编号|int|否|主键
+user_id|用户id|int|否|
+receiver_name|收件人姓名|varchar(50)|否|
+phone|电话|varchar(20)|否|
+province|省份|varchar(50)|否|
+city|城市|varchar(50)|否|
+district|区县|varchar(50)|否|
+detailed_address|详细电话|varchar(200)|否|
+is_default|是否默认|tinyint(1)|否|
+created_at|创建时间|datetime|否|
+TABLE 9 rows 4 cols 5
+列   名|字段名称|类型（长度）|能否为空|约束
+user_id|用户id|int|否|主键
+clothing_id|服装id|int|否|主键
+created_at|创建时间|datetime|否|
+TABLE 10 rows 2 cols 5
+列名|字段名称|类型（长度）|能否为空|约束
+id|编号|int|否|主键
+TABLE 11 rows 19 cols 5
+username|用户名称|varchar(64)|否|
+email|邮箱|varchar(120)|否|
+password_hash|密码哈希值|varchar(128)|否|
+role|角色|varchar(20)|否|
+gender|性别|varchar(10)|是|
+age|年龄|int|是|
+body_type|体型|varchar(20)|是|
+height|身高|int|是|
+weight|体重|int|是|
+real_name|真实姓名|varchar(64)|是|
+phone|电话|varchar(20)|是|
+shop_name|店铺名称|varchar(100)|是|
+shop_address|店铺地址|varchar(200)|是|
+shop_phone|店铺电话|varchar(20)|是|
+shop_status|店铺状态|varchar(20)|是|
+business_license|营业执照|varchar(100)|是|
+created_at|创建时间|datetime|否|
+style_preference|风格偏好|varchar(20)|是|
+color_preference|颜色偏好|varchar(20)|是|
+TABLE 12 rows 3 cols 6
+编号|功能模块|操作过程|预期结果|实际结果|是否通过
+1|用户注册|访问系统首页，点击“注册”，输入合法的用户名、密码和邮箱，点击提交按钮|系统提示“注册成功”，并跳转至登录页面，用户数据写入数据库|与预期一致|是
+2|用户注册|输入已存在的用户名，点击提交|系统提示“用户名已存在”，注册失败|与预期一致|是
+TABLE 13 rows 2 cols 6
+3|用户登录|输入正确的用户名和密码，点击“登录”按钮|成功登录系统，进入用户首页界面|与预期一致|是
+4|用户登录|输入正确的用户名，错误的密码点击“登录”|系统提示“密码错误”，拒绝登录|与预期一致|是
+TABLE 14 rows 4 cols 6
+编号|功能模块|操作过程|预期结果|实际结果|是否通过
+1|添加商品|商家登录系统，进入商品管理页面，点击“添加商品”填写商品信息并提交|新商品成功添加，系统显示商品列表并包含新商品|通过|是
+2|编辑商品|选择已上架的商品，修改商品信息后提交|商品信息修改成功，系统更新商品详情|通过|是
+3|删除商品|选择已上架的商品，点击“删除”按钮|商品从系统商品列表中移除|通过|是
+TABLE 15 rows 3 cols 6
+编号|功能模块|操作过程|预期结果|实际结果|是否通过
+1|用户下单|用户登录系统，浏览商品，添加至购物车并提交订单|订单生成，状态为“待付款”|通过|是
+2|订单支付|选择订单，完成支付|订单状态变为“已支付”|通过|是
+TABLE 16 rows 1 cols 6
+3|订单取消|选择待支付订单，点击取消|订单取消成功，状态变为“已取消”|通过|是
+TABLE 17 rows 3 cols 6
+编号|功能模块|操作过程|预期结果|实际结果|是否通过
+1|商品评论|用户登录系统，在已完成订单中选择商品，填写评论内容并提交|评论成功提交，商品详情页显示用户评价|通过|是
+2|收藏商品|用户浏览商品，点击“收藏”按钮|商品成功添加至收藏列表|通过|是
+TABLE 18 rows 2 cols 6
+编号|功能模块|操作过程|预期结果|实际结果|是否通过
+1|推荐系统|用户登录系统，浏览多个商品后进入推荐页面|推荐页面显示与用户浏览记录相关的商品|通过|是
