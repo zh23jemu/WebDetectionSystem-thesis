@@ -17,8 +17,9 @@
         <div class="tab-pane fade show active" id="upload-pane">
             <form id="uploadForm">
                 <div class="mb-3">
-                    <input class="form-control" type="file" id="images" name="images" multiple>
+                    <input class="form-control" type="file" id="images" name="images" multiple accept="image/*">
                 </div>
+                <div class="row g-3 mb-3" id="previewArea"></div>
                 <button type="button" class="btn btn-primary" onclick="startDetection('uploadForm')">
                     <i class="fas fa-play"></i> 开始检测
                 </button>
@@ -51,6 +52,40 @@
 {% block scripts %}
 <script>
 let videoStream = null;
+const imageInput = document.getElementById('images');
+const previewArea = document.getElementById('previewArea');
+
+if (imageInput) {
+    imageInput.addEventListener('change', renderSelectedPreviews);
+}
+
+function renderSelectedPreviews() {
+    previewArea.innerHTML = '';
+
+    const files = Array.from(imageInput.files || []);
+    if (!files.length) return;
+
+    files.forEach(file => {
+        if (!file.type.startsWith('image/')) return;
+
+        const col = document.createElement('div');
+        col.className = 'col-md-3 col-sm-6';
+
+        const objectUrl = URL.createObjectURL(file);
+        col.innerHTML = `
+            <div class="card h-100 shadow-sm">
+                <img src="${objectUrl}" class="card-img-top" alt="${file.name}" style="height: 180px; object-fit: cover;">
+                <div class="card-body p-2">
+                    <small class="text-muted d-block text-truncate" title="${file.name}">${file.name}</small>
+                </div>
+            </div>
+        `;
+
+        const img = col.querySelector('img');
+        img.addEventListener('load', () => URL.revokeObjectURL(objectUrl), { once: true });
+        previewArea.appendChild(col);
+    });
+}
 
 // 初始化摄像头
 function initCamera() {
@@ -108,6 +143,13 @@ function captureAndDetect() {
 function startDetection(formId) {
     const form = document.getElementById(formId);
     const formData = new FormData(form);
+    const files = formData.getAll('images');
+
+    if (!files.length || !files[0] || !files[0].name) {
+        alert("请先选择图片");
+        return;
+    }
+
     submitDetection(formData);
 }
 
@@ -128,24 +170,40 @@ function submitDetection(formData) {
     .then(data => {
         loadingDiv.remove(); // 移除加载动画
 
-        if(data.error) { alert(data.error); return; }
+        if (data.error) {
+            alert(data.error);
+            return;
+        }
+
+        if (!Array.isArray(data)) {
+            alert("检测返回数据格式异常");
+            return;
+        }
+
+        const errorItem = data.find(item => item && item.error);
+        if (errorItem) {
+            alert(errorItem.error);
+            return;
+        }
 
         data.forEach(item => {
+            if (!item || !item.filepath) return;
+
             const col = document.createElement('div');
             col.className = 'col-md-3 mb-4';
             const badgeClass = item.is_clean ? 'bg-success' : 'bg-danger';
 
             // 构建HTML，显示中文缺陷和判定等级
             col.innerHTML = `
-                <div class="card">
+                <div class="card h-100 shadow-sm">
                     <img src="/static/results/${item.filepath}" class="card-img-top" alt="Result">
                     <div class="card-body">
                         <h6 class="card-title">
                             <span class="badge ${badgeClass}">${item.defects}</span>
                         </h6>
                         <div class="d-flex justify-content-between align-items-center mt-2">
-                            <small class="text-muted fw-bold">判定: ${item.grade}</small>
-                            <small class="text-muted">Conf: ${item.confidence}</small>
+                            <small class="text-muted fw-bold">判定: ${item.grade ?? '-'}</small>
+                            <small class="text-muted">Conf: ${item.confidence ?? '-'}</small>
                         </div>
                     </div>
                 </div>
