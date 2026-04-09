@@ -6,3 +6,4 @@ opencv-python-headless
 Werkzeug
 pandas
 openpyxl
+dill
