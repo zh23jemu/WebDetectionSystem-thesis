@@ -1,0 +1,46 @@
+classDiagram
+    %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffffff', 'fontFamily': 'SimSun, Microsoft YaHei', 'lineColor': '#000000', 'textColor': '#000000'}}}%%
+    class User {
+        +id
+        +username
+        +password
+        +role
+    }
+
+    class DetectionHistory {
+        +id
+        +filename
+        +result_image
+        +upload_date
+        +defect_type
+        +confidence
+        +user_id
+        +grade
+    }
+
+    class WorkLog {
+        +id
+        +user_id
+        +login_time
+        +logout_time
+    }
+
+    class SalesRecord {
+        +id
+        +customer_name
+        +product_grade
+        +quantity
+        +total_price
+        +sale_date
+    }
+
+    class SystemSettings {
+        +id
+        +key_name
+        +value
+    }
+
+    class Inventory {
+        +grade
+        +count
+    }

@@ -1,0 +1,52 @@
+%%{init: {'theme': 'default', 'themeVariables': { 'fontFamily': 'SimSun, Microsoft YaHei, sans-serif' }}}%%
+flowchart TD
+    classDef default fill:#FFFFFF,stroke:#000000,stroke-width:1.5px,color:#000000;
+    classDef layerFill fill:#FFFFFF,stroke:#000000,stroke-width:1.5px,stroke-dasharray: 5 5,color:#000000,font-weight:bold;
+
+    U1([用户])
+    U2([管理员])
+
+    subgraph Web前端["第二层：Web 前端界面"]
+        direction LR
+        P1[登录页面]
+        P2[仪表盘]
+        P3[缺陷检测页面]
+        P4[历史记录页面]
+        P5[日志报表页面]
+        P6[销售管理页面]
+        P7[缺陷图谱页面]
+        P8[用户管理页面]
+        P9[系统设置页面]
+    end
+
+    subgraph Flask后端["第三层：Flask 后端业务逻辑"]
+        direction LR
+        M1[用户认证与权限控制模块]
+        M2[检测处理模块]
+        M3[历史记录管理模块]
+        M4[日志报表统计模块]
+        M5[销售与库存管理模块]
+        M6[系统设置与模型切换模块]
+    end
+
+    subgraph 数据与模型["第四层：数据与资源层"]
+        direction LR
+        D2{{YOLO 缺陷检测模型}}
+        D1[(SQLite 数据库)]
+        D3[静态资源文件]
+        D4[/上传图片目录/]
+        D5[/检测结果目录/]
+        D6[/缺陷图谱素材/]
+    end
+
+    U1 --> Web前端
+    U2 --> Web前端
+    Web前端 --> Flask后端
+    Flask后端 --> D2
+    Flask后端 --> D1
+    Flask后端 --> D3
+    Flask后端 -.-> D4
+    Flask后端 -.-> D5
+    Flask后端 -.-> D6
+
+    class Web前端,Flask后端,数据与模型 layerFill;

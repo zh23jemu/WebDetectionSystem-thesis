@@ -1,0 +1,19 @@
+erDiagram
+    %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffffff', 'fontFamily': 'SimSun, Microsoft YaHei', 'lineColor': '#000000', 'textColor': '#000000'}}}%%
+    User ||--o{ DetectionHistory : "产生检测记录"
+    User ||--o{ WorkLog : "产生工作日志"
+    Inventory ||--o{ SalesRecord : "支撑销售出库"
+    
+    User {
+    }
+    DetectionHistory {
+    }
+    WorkLog {
+    }
+    Inventory {
+    }
+    SalesRecord {
+    }
+    SystemSettings {
+        string desc "独立配置实体"
+    }

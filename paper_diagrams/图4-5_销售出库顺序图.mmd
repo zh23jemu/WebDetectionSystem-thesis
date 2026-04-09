@@ -1,0 +1,24 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffffff', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#ffffff', 'fontFamily': 'SimSun, Microsoft YaHei', 'lineColor': '#000000', 'textColor': '#000000'}}}%%
+sequenceDiagram
+    autonumber
+    actor User as 用户
+    participant Page as 销售页面
+    participant Backend as Flask后端
+    participant Inv as 库存表
+    participant DB as 数据库
+
+    User->>Page: 填写订单信息
+    Page->>Backend: 提交销售订单
+    Backend->>Inv: 查询等级库存
+    Inv-->>Backend: 返回库存数量
+    Backend->>Backend: 判断库存是否充足
+    
+    alt 库存充足
+        Backend->>Inv: 扣减库存
+        Backend->>DB: 写入销售记录
+        Backend-->>Page: 返回创建成功
+        Page-->>User: 显示成功提示
+    else 库存不足
+        Backend-->>Page: 返回库存不足提示
+        Page-->>User: 显示失败信息
+    end

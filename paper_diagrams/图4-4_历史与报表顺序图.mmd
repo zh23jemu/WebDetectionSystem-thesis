@@ -1,0 +1,15 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffffff', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#ffffff', 'fontFamily': 'SimSun, Microsoft YaHei', 'lineColor': '#000000', 'textColor': '#000000'}}}%%
+sequenceDiagram
+    autonumber
+    actor User as 用户
+    participant Page as 历史/报表页面
+    participant Backend as Flask后端
+    participant DB as 数据库
+
+    User->>Page: 请求查看数据
+    Page->>Backend: 发送查询请求
+    Backend->>DB: 查询检测记录和日志数据
+    DB-->>Backend: 返回记录数据
+    Backend->>Backend: 统计趋势、占比和工作时长
+    Backend-->>Page: 返回列表和图表数据
+    Page-->>User: 展示历史记录和统计结果
