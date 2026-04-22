@@ -25,7 +25,9 @@ def load_font(size: int):
 FONT_20 = load_font(20)
 FONT_24 = load_font(24)
 FONT_28 = load_font(28)
-FONT_34 = load_font(34)
+FONT_32 = load_font(32)
+FONT_36 = load_font(36)
+FONT_40 = load_font(40)
 
 
 def canvas(size=(1600, 950)):
@@ -143,7 +145,7 @@ def fig4_1():
     img, draw = make_canvas((1600, 980))
     draw_box(draw, (250, 70, 470, 150), "普通用户")
     draw_box(draw, (1130, 70, 1350, 150), "管理员")
-    draw_box(draw, (560, 170, 1040, 270), "Web前端界面", FONT_34)
+    draw_box(draw, (540, 165, 1060, 275), "Web前端界面", FONT_40)
 
     y1 = 360
     boxes = [
@@ -155,7 +157,7 @@ def fig4_1():
         ((1370, y1, 1580, y1 + 90), "帮助中心与系统设置"),
     ]
     for box, text in boxes:
-        draw_box(draw, box, text, FONT_24)
+        draw_box(draw, box, text, FONT_28)
 
     bottom = [
         ((250, 640, 500, 730), "YOLO检测模型"),
@@ -163,7 +165,7 @@ def fig4_1():
         ((1090, 640, 1370, 730), "静态资源文件"),
     ]
     for box, text in bottom:
-        draw_box(draw, box, text, FONT_28)
+        draw_box(draw, box, text, FONT_32)
 
     for x in [360, 1240]:
         draw.line((x, 150, 800, 170), fill="black", width=3)
@@ -190,18 +192,18 @@ def fig4_2():
     for x, label in zip(xs[1:], labels[1:]):
         draw_lifeline(draw, x, 70, 860, label, actor=False)
 
-    draw_arrow(draw, (xs[0] + 14, 250), (xs[1] - 14, 250), "点击登录入口")
-    draw_arrow(draw, (xs[1] - 16, 340), (xs[0] + 16, 340), "显示登录界面")
-    draw_arrow(draw, (xs[0] + 14, 430), (xs[1] - 14, 430), "输入用户名和密码并点击登录")
-    draw_arrow(draw, (xs[1] + 14, 530), (xs[2] - 14, 530), "提交登录请求")
-    draw_arrow(draw, (xs[2] + 14, 620), (xs[3] - 14, 620), "查询用户信息")
-    draw_arrow(draw, (xs[3] - 14, 700), (xs[2] + 14, 700), "返回用户记录", dashed=True)
+    draw_arrow(draw, (xs[0] + 14, 250), (xs[1] - 14, 250), "点击登录入口", font=FONT_28)
+    draw_arrow(draw, (xs[1] - 16, 340), (xs[0] + 16, 340), "显示登录界面", font=FONT_28)
+    draw_arrow(draw, (xs[0] + 14, 430), (xs[1] - 14, 430), "输入账号和密码", font=FONT_28)
+    draw_arrow(draw, (xs[1] + 14, 530), (xs[2] - 14, 530), "提交登录请求", font=FONT_28)
+    draw_arrow(draw, (xs[2] + 14, 620), (xs[3] - 14, 620), "查询用户信息", font=FONT_28)
+    draw_arrow(draw, (xs[3] - 14, 700), (xs[2] + 14, 700), "返回用户记录", dashed=True, font=FONT_28)
 
-    draw_alt_box(draw, (120, 730, 920, 930), ["[验证成功]", "[验证失败]"])
-    draw_arrow(draw, (xs[2] - 14, 790), (xs[1] + 14, 790), "返回成功结果", dashed=True)
-    draw_arrow(draw, (xs[1] - 14, 840), (xs[0] + 14, 840), "进入系统主界面")
-    draw_arrow(draw, (xs[2] - 14, 900), (xs[1] + 14, 900), "返回失败结果", dashed=True)
-    draw_arrow(draw, (xs[1] - 14, 920), (xs[0] + 14, 920), "显示错误提示")
+    draw_alt_box(draw, (120, 730, 980, 930), ["[验证成功]", "[验证失败]"])
+    draw_arrow(draw, (xs[2] - 14, 790), (xs[1] + 14, 790), "返回成功结果", dashed=True, font=FONT_28)
+    draw_arrow(draw, (xs[1] - 14, 840), (xs[0] + 14, 840), "进入系统主界面", font=FONT_28)
+    draw_arrow(draw, (xs[2] - 14, 900), (xs[1] + 14, 900), "返回失败结果", dashed=True, font=FONT_28)
+    draw_arrow(draw, (xs[1] - 14, 920), (xs[0] + 14, 920), "显示错误提示", font=FONT_28)
 
     save(img, "图4-2_登录顺序图_参考风格.png")
 
@@ -215,15 +217,15 @@ def fig4_3():
         draw_lifeline(draw, x, 70, 860, label)
 
     ys = [240, 320, 400, 480, 560, 640, 720, 800]
-    draw_arrow(draw, (xs[0] + 14, ys[0]), (xs[1] - 14, ys[0]), "选择图片/拍照")
-    draw_arrow(draw, (xs[1] + 14, ys[1]), (xs[2] - 14, ys[1]), "上传检测图片")
-    draw_arrow(draw, (xs[2] + 14, ys[2]), (xs[3] - 14, ys[2]), "调用模型进行检测")
-    draw_arrow(draw, (xs[3] - 14, ys[3]), (xs[2] + 14, ys[3]), "返回缺陷类别和置信度", dashed=True)
-    centered_text(draw, (760, 545), "缺陷映射与等级判定", FONT_24)
-    draw_arrow(draw, (xs[2] + 14, ys[4]), (xs[4] - 14, ys[4]), "写入检测历史")
-    draw_arrow(draw, (xs[2] + 14, ys[5]), (xs[5] - 14, ys[5]), "更新库存数量")
-    draw_arrow(draw, (xs[2] - 14, ys[6]), (xs[1] + 14, ys[6]), "返回结果图和检测结果", dashed=True)
-    draw_arrow(draw, (xs[1] - 14, ys[7]), (xs[0] + 14, ys[7]), "显示检测结果")
+    draw_arrow(draw, (xs[0] + 14, ys[0]), (xs[1] - 14, ys[0]), "选择图片或拍照", font=FONT_28)
+    draw_arrow(draw, (xs[1] + 14, ys[1]), (xs[2] - 14, ys[1]), "上传检测图片", font=FONT_28)
+    draw_arrow(draw, (xs[2] + 14, ys[2]), (xs[3] - 14, ys[2]), "调用模型检测", font=FONT_28)
+    draw_arrow(draw, (xs[3] - 14, ys[3]), (xs[2] + 14, ys[3]), "返回类别与置信度", dashed=True, font=FONT_28)
+    centered_text(draw, (760, 545), "缺陷映射与等级判定", FONT_28)
+    draw_arrow(draw, (xs[2] + 14, ys[4]), (xs[4] - 14, ys[4]), "写入检测历史", font=FONT_28)
+    draw_arrow(draw, (xs[2] + 14, ys[5]), (xs[5] - 14, ys[5]), "更新库存数量", font=FONT_28)
+    draw_arrow(draw, (xs[2] - 14, ys[6]), (xs[1] + 14, ys[6]), "返回结果图和结果数据", dashed=True, font=FONT_28)
+    draw_arrow(draw, (xs[1] - 14, ys[7]), (xs[0] + 14, ys[7]), "显示检测结果", font=FONT_28)
 
     save(img, "图4-3_缺陷检测顺序图_参考风格.png")
 
@@ -236,13 +238,13 @@ def fig4_4():
     for x, label in zip(xs[1:], labels[1:]):
         draw_lifeline(draw, x, 70, 860, label)
 
-    draw_arrow(draw, (xs[0] + 14, 250), (xs[1] - 14, 250), "进入页面")
-    draw_arrow(draw, (xs[1] + 14, 340), (xs[2] - 14, 340), "发送查询请求")
-    draw_arrow(draw, (xs[2] + 14, 430), (xs[3] - 14, 430), "查询检测历史与日志")
-    draw_arrow(draw, (xs[3] - 14, 520), (xs[2] + 14, 520), "返回记录数据", dashed=True)
-    centered_text(draw, (980, 605), "统计缺陷占比、趋势和工作时长", FONT_24)
-    draw_arrow(draw, (xs[2] - 14, 700), (xs[1] + 14, 700), "返回列表和图表数据", dashed=True)
-    draw_arrow(draw, (xs[1] - 14, 790), (xs[0] + 14, 790), "显示历史记录与统计结果")
+    draw_arrow(draw, (xs[0] + 14, 250), (xs[1] - 14, 250), "进入页面", font=FONT_28)
+    draw_arrow(draw, (xs[1] + 14, 340), (xs[2] - 14, 340), "发送查询请求", font=FONT_28)
+    draw_arrow(draw, (xs[2] + 14, 430), (xs[3] - 14, 430), "查询历史与日志", font=FONT_28)
+    draw_arrow(draw, (xs[3] - 14, 520), (xs[2] + 14, 520), "返回记录数据", dashed=True, font=FONT_28)
+    centered_text(draw, (980, 605), "统计占比、趋势和工作时长", FONT_28)
+    draw_arrow(draw, (xs[2] - 14, 700), (xs[1] + 14, 700), "返回列表和图表数据", dashed=True, font=FONT_28)
+    draw_arrow(draw, (xs[1] - 14, 790), (xs[0] + 14, 790), "显示查询和统计结果", font=FONT_28)
 
     save(img, "图4-4_历史与报表顺序图_参考风格.png")
 
@@ -255,10 +257,10 @@ def fig4_5():
     for x, label in zip(xs[1:], labels[1:]):
         draw_lifeline(draw, x, 70, 860, label)
 
-    draw_arrow(draw, (xs[0] + 14, 240), (xs[1] - 14, 240), "填写订单信息")
-    draw_arrow(draw, (xs[1] + 14, 330), (xs[2] - 14, 330), "提交销售订单")
-    draw_arrow(draw, (xs[2] + 14, 420), (xs[3] - 14, 420), "查询库存数量")
-    draw_arrow(draw, (xs[3] - 14, 510), (xs[2] + 14, 510), "返回库存结果", dashed=True)
+    draw_arrow(draw, (xs[0] + 14, 240), (xs[1] - 14, 240), "填写订单信息", font=FONT_28)
+    draw_arrow(draw, (xs[1] + 14, 330), (xs[2] - 14, 330), "提交销售订单", font=FONT_28)
+    draw_arrow(draw, (xs[2] + 14, 420), (xs[3] - 14, 420), "查询库存数量", font=FONT_28)
+    draw_arrow(draw, (xs[3] - 14, 510), (xs[2] + 14, 510), "返回库存结果", dashed=True, font=FONT_28)
 
     # Custom alt frame so branch labels can avoid overlapping with message labels.
     x1, y1, x2, y2 = 220, 560, 1170, 930
@@ -266,13 +268,13 @@ def fig4_5():
     draw.text((x1 + 12, y1 + 10), "alt", font=FONT_24, fill="black")
     divider_y = 720
     draw_dashed_line(draw, (x1, divider_y), (x2, divider_y), dash=10, gap=6, width=2)
-    centered_text(draw, (760, 645), "[库存充足]", FONT_24)
-    centered_text(draw, (760, 760), "[库存不足]", FONT_24)
-    draw_arrow(draw, (xs[2] + 14, 650), (xs[3] - 14, 650), "扣减库存")
+    centered_text(draw, (760, 645), "[库存充足]", FONT_28)
+    centered_text(draw, (760, 760), "[库存不足]", FONT_28)
+    draw_arrow(draw, (xs[2] + 14, 650), (xs[3] - 14, 650), "扣减库存", font=FONT_28)
 
     # Separate these two labels vertically to avoid overlap in the alt frame.
     draw.line((xs[2] + 14, 725, xs[4] - 14, 725), fill="black", width=3)
-    centered_text(draw, ((xs[2] + xs[4]) / 2, 700), "写入销售记录", FONT_24)
+    centered_text(draw, ((xs[2] + xs[4]) / 2, 700), "写入销售记录", FONT_28)
     # arrow head for rightward solid line
     draw.line([(xs[4] - 14, 725), (xs[4] - 32, 715)], fill="black", width=3)
     draw.line([(xs[4] - 14, 725), (xs[4] - 32, 735)], fill="black", width=3)
@@ -281,14 +283,14 @@ def fig4_5():
     draw.line([(xs[1] + 14, 790), (xs[1] + 32, 780)], fill="black", width=3)
     draw.line([(xs[1] + 14, 790), (xs[1] + 32, 800)], fill="black", width=3)
     # Move this label further upward to avoid overlapping with the alt divider line.
-    centered_text(draw, ((xs[2] + xs[1]) / 2 - 140, 700), "返回创建成功", FONT_24)
+    centered_text(draw, ((xs[2] + xs[1]) / 2 - 140, 700), "返回创建成功", FONT_28)
 
-    draw_arrow(draw, (xs[1] - 14, 855), (xs[0] + 14, 855), "显示成功提示")
+    draw_arrow(draw, (xs[1] - 14, 855), (xs[0] + 14, 855), "显示成功提示", font=FONT_28)
 
     draw_dashed_line(draw, (xs[2] - 14, 900), (xs[1] + 14, 900), dash=14, gap=8, width=3)
     draw.line([(xs[1] + 14, 900), (xs[1] + 32, 890)], fill="black", width=3)
     draw.line([(xs[1] + 14, 900), (xs[1] + 32, 910)], fill="black", width=3)
-    centered_text(draw, ((xs[2] + xs[1]) / 2, 875), "返回库存不足提示", FONT_24)
+    centered_text(draw, ((xs[2] + xs[1]) / 2, 875), "返回库存不足提示", FONT_28)
 
     save(img, "图4-5_销售出库顺序图_参考风格.png")
 
@@ -296,17 +298,17 @@ def fig4_5():
 def fig4_6():
     img, draw = make_canvas((1600, 980))
     center = (800, 490)
-    draw_box(draw, (690, 430, 910, 550), "检测历史", FONT_34)
+    draw_box(draw, (680, 420, 920, 560), "检测历史", FONT_36)
 
     ellipses = [
-        ((620, 120, 980, 220), "upload_date"),
-        ((1040, 220, 1420, 320), "result_image"),
-        ((1060, 420, 1450, 520), "defect_type"),
-        ((1020, 660, 1380, 760), "grade"),
-        ((580, 760, 1020, 860), "confidence"),
-        ((160, 660, 520, 760), "user_id"),
-        ((120, 420, 510, 520), "filename"),
-        ((180, 220, 500, 320), "id"),
+        ((610, 110, 990, 220), "检测时间"),
+        ((1050, 210, 1450, 320), "结果图片"),
+        ((1060, 420, 1480, 530), "缺陷类型"),
+        ((1040, 660, 1420, 770), "判定等级"),
+        ((560, 780, 1040, 890), "最高置信度"),
+        ((130, 660, 510, 770), "用户编号"),
+        ((120, 420, 510, 530), "原始文件名"),
+        ((170, 210, 500, 320), "检测编号"),
     ]
     anchors = [
         (800, 430), (910, 450), (910, 490), (860, 550),
@@ -317,7 +319,7 @@ def fig4_6():
         (800, 760), (520, 710), (510, 470), (500, 270)
     ]
     for (box, text), a, b in zip(ellipses, anchors, ellipse_points):
-        draw_ellipse(draw, box, text, FONT_28)
+        draw_ellipse(draw, box, text, FONT_32)
         draw.line((a, b), fill="black", width=3)
 
     save(img, "图4-6_主要实体属性图_参考风格.png")
@@ -326,48 +328,48 @@ def fig4_6():
 def fig4_7():
     img, draw = make_canvas((1700, 1100))
     # entities
-    user = (180, 350, 330, 430)
-    history = (740, 330, 930, 410)
-    worklog = (700, 640, 890, 720)
-    inventory = (1230, 330, 1400, 410)
-    sales = (1220, 670, 1420, 750)
-    settings = (760, 110, 910, 190)
+    user = (150, 310, 340, 410)
+    history = (730, 290, 960, 390)
+    worklog = (710, 650, 940, 750)
+    inventory = (1270, 280, 1470, 380)
+    sales = (1250, 660, 1490, 760)
     for box, text in [
         (user, "用户"), (history, "检测历史"), (worklog, "工作日志"),
-        (inventory, "库存"), (sales, "销售记录"), (settings, "系统设置")
+        (inventory, "库存"), (sales, "销售记录")
     ]:
-        draw_box(draw, box, text, FONT_28)
+        draw_box(draw, box, text, FONT_32)
 
     # relationships
-    draw_diamond(draw, (530, 380), (140, 90), "产生")
-    draw_diamond(draw, (500, 680), (140, 90), "记录")
-    draw_diamond(draw, (1080, 380), (150, 90), "配置")
-    draw_diamond(draw, (1070, 710), (150, 90), "对应")
+    draw_diamond(draw, (520, 350), (160, 100), "产生", font=FONT_28)
+    draw_diamond(draw, (500, 700), (160, 100), "记录", font=FONT_28)
+    draw_diamond(draw, (1110, 330), (160, 100), "更新", font=FONT_28)
+    draw_diamond(draw, (1090, 710), (160, 100), "出库", font=FONT_28)
 
     # lines and cardinality
-    draw.line((330, 390, 460, 390), fill="black", width=3)
-    draw.line((600, 380, 740, 370), fill="black", width=3)
-    centered_text(draw, (400, 360), "1", FONT_24)
-    centered_text(draw, (665, 350), "N", FONT_24)
+    draw.line((340, 360, 440, 360), fill="black", width=3)
+    draw.line((600, 350, 730, 340), fill="black", width=3)
+    centered_text(draw, (390, 325), "1", FONT_28)
+    centered_text(draw, (665, 320), "N", FONT_28)
 
-    draw.line((320, 400, 430, 680), fill="black", width=3)
-    draw.line((570, 680, 700, 680), fill="black", width=3)
-    centered_text(draw, (360, 530), "1", FONT_24)
-    centered_text(draw, (635, 650), "N", FONT_24)
+    draw.line((315, 390, 430, 700), fill="black", width=3)
+    draw.line((580, 700, 710, 700), fill="black", width=3)
+    centered_text(draw, (355, 525), "1", FONT_28)
+    centered_text(draw, (640, 665), "N", FONT_28)
 
-    draw.line((930, 370, 1005, 380), fill="black", width=3)
-    draw.line((1155, 380, 1230, 370), fill="black", width=3)
-    centered_text(draw, (970, 345), "1", FONT_24)
-    centered_text(draw, (1185, 345), "1", FONT_24)
+    draw.line((960, 340, 1030, 330), fill="black", width=3)
+    draw.line((1190, 330, 1270, 330), fill="black", width=3)
+    centered_text(draw, (995, 300), "1", FONT_28)
+    centered_text(draw, (1225, 300), "1", FONT_28)
 
-    draw.line((900, 680, 995, 710), fill="black", width=3)
-    draw.line((1145, 710, 1220, 710), fill="black", width=3)
-    centered_text(draw, (945, 650), "1", FONT_24)
-    centered_text(draw, (1185, 680), "N", FONT_24)
+    draw.line((940, 700, 1010, 710), fill="black", width=3)
+    draw.line((1170, 710, 1250, 710), fill="black", width=3)
+    centered_text(draw, (975, 665), "1", FONT_28)
+    centered_text(draw, (1215, 675), "N", FONT_28)
 
-    draw.line((835, 190, 835, 280), fill="black", width=3)
-    draw.line((835, 280, 1080, 280), fill="black", width=3)
-    draw.line((1080, 280, 1080, 335), fill="black", width=3)
+    draw.line((960, 390, 1110, 660), fill="black", width=3)
+    draw.line((1470, 380, 1110, 660), fill="black", width=3)
+    centered_text(draw, (1075, 510), "1", FONT_28)
+    centered_text(draw, (1355, 500), "N", FONT_28)
 
     save(img, "图4-7_系统E-R图_参考风格.png")
 
