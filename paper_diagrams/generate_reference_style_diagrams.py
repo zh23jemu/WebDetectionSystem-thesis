@@ -262,12 +262,8 @@ def fig4_5():
     draw_arrow(draw, (xs[2] + 14, 420), (xs[3] - 14, 420), "查询库存数量", font=FONT_28)
     draw_arrow(draw, (xs[3] - 14, 510), (xs[2] + 14, 510), "返回库存结果", dashed=True, font=FONT_28)
 
-    # Custom alt frame so branch labels can avoid overlapping with message labels.
-    x1, y1, x2, y2 = 220, 560, 1170, 930
-    draw.rectangle((x1, y1, x2, y2), outline="black", width=2)
-    draw.text((x1 + 12, y1 + 10), "alt", font=FONT_24, fill="black")
+    # 仅保留分支说明文字，不再绘制外层 alt 框和左上角标签。
     divider_y = 720
-    draw_dashed_line(draw, (x1, divider_y), (x2, divider_y), dash=10, gap=6, width=2)
     centered_text(draw, (760, 645), "[库存充足]", FONT_28)
     centered_text(draw, (760, 760), "[库存不足]", FONT_28)
     draw_arrow(draw, (xs[2] + 14, 650), (xs[3] - 14, 650), "扣减库存", font=FONT_28)
