@@ -1,2 +1,7 @@
 paper_diagrams/reference_doc_media/*
 导师修改意见2/
+*_sync前备份.docx
+*_用例图替换前备份.docx
+* - 副本*.docx
+tmp_imgs/
+sync_md_to_docx.py
